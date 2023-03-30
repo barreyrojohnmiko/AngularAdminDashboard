@@ -16,6 +16,7 @@ import { SidebarComponent } from './views/sidebar/sidebar.component';
     FormsModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
+      { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
     ]),
     HttpClientModule,

@@ -1,5 +1,51 @@
 .sidebar-main-container {
   height: 100vh;
-  width: 180px;
-  background-color: rgb(209, 39, 39);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  background: #6f6af8;
+}
+
+.sidebar-title {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  color: white;
+  margin: 20px 0;
+}
+
+.sidebar-panel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-menu-container {
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 5px;
+  padding: 0 20px;
+  gap: 20px;
+  transition: background 0.1s ease;
+}
+
+.sidebar-menu-container:hover {
+  background: #908bfa;
+}
+
+.sidebar-menu-logo {
+  font-size: 14px;
+  color: white;
+}
+
+.sidebar-menu-label {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
 }
