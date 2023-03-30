@@ -6,14 +6,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { SidebarComponent } from './views/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [AppComponent, DashboardComponent, LoginComponent, SidebarComponent],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: DashboardComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'dashboard', component: DashboardComponent },
     ]),
     HttpClientModule,
