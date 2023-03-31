@@ -1,9 +1,9 @@
 .sidebar-main-container {
   height: 100vh;
   width: 180px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
   background: #ffe6c9;
   transition: width 0.3s ease-in-out;
   overflow: hidden;
@@ -12,8 +12,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 10px;
-    gap: 20px;
+    // gap: 20px;
 
     header {
       font-family: "Poppins", sans-serif;
@@ -28,43 +27,50 @@
       height: 30px;
     }
   }
+
+  .sidebar-panel-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: opacity 0.3s ease-in-out;
+
+    .sidebar-menu-container {
+      height: 48px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-radius: 5px;
+      // gap: 30px;
+      transition: background 0.1s ease;
+
+      .sidebar-menu-logo {
+        font-size: 14px;
+        color: #354f52;
+      }
+
+      header {
+        font-family: "Poppins", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        color: #354f52;
+      }
+    }
+
+    .sidebar-menu-container:hover {
+      background: #ecd4b8;
+    }
+  }
+}
+
+.sidebar-left {
+  min-width: 40px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar-main-container.collapsed {
   width: 40px;
-}
-
-.sidebar-panel-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  transition: opacity 0.3s ease-in-out;
-
-  .sidebar-menu-container {
-    height: 48px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 5px;
-    padding: 0 20px;
-    gap: 30px;
-    transition: background 0.1s ease;
-
-    .sidebar-menu-logo {
-      font-size: 14px;
-      color: #354f52;
-    }
-
-    header {
-      font-family: "Poppins", sans-serif;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      color: #354f52;
-    }
-  }
-
-  .sidebar-menu-container:hover {
-    background: #ecd4b8;
-  }
 }
