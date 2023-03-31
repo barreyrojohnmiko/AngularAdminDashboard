@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<router-outlet *ngIf="isLoginRoute"></router-outlet>
+
+<div class="app-component-main-container" *ngIf="!isLoginRoute">
+  <div class="sidebar-section">
+    <app-sidebar />
+  </div>
+  <router-outlet></router-outlet>
+</div>
