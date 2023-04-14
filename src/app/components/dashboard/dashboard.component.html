@@ -1,3 +1,21 @@
 <div class="dashboard-main-container">
-  <div>Hello</div>
+  <div class="carousel-container">
+    <p-carousel [value]="images" [circular]="true">
+      <ng-template let-image pTemplate="item">
+        <img src="{{ image }}" alt="image" />
+      </ng-template>
+
+      <ng-template #headerTemplate>
+        <span class="carousel-arrow left" (click)="prevSlide()"
+          ><i class="pi pi-chevron-left"></i
+        ></span>
+      </ng-template>
+
+      <ng-template #footerTemplate>
+        <span class="carousel-arrow right" (click)="nextSlide()"
+          ><i class="pi pi-chevron-right"></i
+        ></span>
+      </ng-template>
+    </p-carousel>
+  </div>
 </div>
