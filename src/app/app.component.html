@@ -2,11 +2,11 @@
   <app-full-page-loader></app-full-page-loader>
 </div>
 
-<router-outlet *ngIf="!isLoggedIn"></router-outlet>
+<router-outlet (activate)="checkSession($event)" *ngIf="!isLoggedIn"></router-outlet>
 
 <div class="app-component-main-container" *ngIf="isLoggedIn">
   <div class="sidebar-section">
     <app-sidebar />
   </div>
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="checkSession($event)"></router-outlet>
 </div>

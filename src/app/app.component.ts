@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { EventService } from './services/event.service';
 
@@ -14,13 +13,15 @@ export class AppComponent implements OnInit {
   // Events
   isShowLoading = false;
 
-  constructor(private router: Router, private eventService: EventService) {}
+  constructor(private eventService: EventService) {}
 
   ngOnInit() {
     this.eventService.alertEvents.subscribe((data: any) => {
       this.isShowLoading = data.status;
     });
+  }
 
+  checkSession(value: any): void {
     const appToken = localStorage.getItem('appToken');
     if (appToken && appToken.trim().indexOf('') !== -1) {
       this.isLoggedIn = true;

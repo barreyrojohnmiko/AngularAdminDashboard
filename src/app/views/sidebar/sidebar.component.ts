@@ -10,10 +10,13 @@ import { SidebarItemsObject } from 'src/app/objects/interface/SidebarItemsObject
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  constructor(private router: Router) {}
-  isCollapsed = false;
+  isCollapsed: boolean = false;
 
-  toggleSidebar() {
+  constructor(private router: Router) {
+    this.isCollapsed = false;
+  }
+
+  handleToggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
 
