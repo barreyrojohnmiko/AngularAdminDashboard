@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
+import { EventService } from './services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +9,21 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  isLoginRoute = false;
+  isLoggedIn = false;
 
-  constructor(private router: Router) {}
+  // Events
+  isShowLoading = false;
+
+  constructor(private router: Router, private eventService: EventService) {}
 
   ngOnInit() {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        this.isLoginRoute = event.url === '/login';
-      });
+    this.eventService.alertEvents.subscribe((data: any) => {
+      this.isShowLoading = data.status;
+    });
+
+    const appToken = localStorage.getItem('appToken');
+    if (appToken && appToken.trim().indexOf('') !== -1) {
+      this.isLoggedIn = true;
+    }
   }
 }

@@ -1,6 +1,10 @@
-<router-outlet *ngIf="isLoginRoute"></router-outlet>
+<div class="app-container" *ngIf="isShowLoading">
+  <app-full-page-loader></app-full-page-loader>
+</div>
 
-<div class="app-component-main-container" *ngIf="!isLoginRoute">
+<router-outlet *ngIf="!isLoggedIn"></router-outlet>
+
+<div class="app-component-main-container" *ngIf="isLoggedIn">
   <div class="sidebar-section">
     <app-sidebar />
   </div>
