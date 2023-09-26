@@ -4,7 +4,7 @@
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  background: #f6f7ff;
+  background-color: #111111;
   transition: width 0.3s ease-in-out;
   overflow: hidden;
 
@@ -18,7 +18,7 @@
       font-style: normal;
       font-weight: 600;
       font-size: 20px;
-      color: #354f52;
+      color: #ffffff;
       margin: 20px 0;
     }
 
@@ -51,12 +51,20 @@
         font-style: normal;
         font-weight: 500;
         font-size: 14px;
-        color: #354f52;
+        color: #ffffff;
       }
     }
 
     .sidebar-menu-container:hover {
-      background: #ecd4b8;
+      background: #ced1f4;
+
+      header {
+        color: #111111;
+      }
+
+      .icons {
+        color: #111111;
+      }
     }
   }
 }
@@ -67,6 +75,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .icons {
+    color: #ffffff;
+  }
 }
 
 .sidebar-main-container.collapsed {

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SidebarItemsData } from 'src/app/objects/data/SidebarItemsData';
 import { SidebarItemsObject } from 'src/app/objects/interface/SidebarItemsObject';
+import { SidebarItemsData } from 'src/app/objects/data/SidebarItemsData';
 
 @Component({
   selector: 'app-sidebar',

@@ -1,0 +1,59 @@
+.dashboard-main-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 20px 30px;
+  gap: 20px;
+
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    header {
+      font-family: "Poppins", sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      color: #354f52;
+    }
+
+    .search-bar-container {
+      display: flex;
+      flex-direction: row;
+      width: 300px;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 1);
+      border: 2px solid black;
+
+      .search-input {
+        background-color: transparent;
+        border: 0;
+        color: black;
+        font-weight: 500;
+      }
+
+      .search-input:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .data-container {
+    .panel-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+
+      .panel-section {
+        background-color: rgb(79, 85, 165);
+        height: 150px;
+        padding: 0 20px 20px 20px;
+        border-radius: 10px;
+      }
+    }
+  }
+}

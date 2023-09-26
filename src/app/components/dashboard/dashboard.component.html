@@ -1,1 +1,24 @@
-<h1>Hello</h1>
+<div class="dashboard-main-container">
+  <div class="header-container">
+    <header>Hello, {{ username }}. 👋</header>
+
+    <div class="search-bar-container">
+      <i class="fa-solid icons fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Search..." class="search-input" />
+    </div>
+  </div>
+
+  <div class="data-container">
+    <div class="panel-container">
+      <div class="panel-section" *ngFor="let panel of dashboardPanels">
+        <div class="panel-left-side">
+          <div class="panel-label">{{ panel.label }}</div>
+          <div class="panel-count">{{ panel.count }}</div>
+        </div>
+        <div class="panel-right-side">
+          <div class="panel-icon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

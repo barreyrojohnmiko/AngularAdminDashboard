@@ -8,5 +8,7 @@
   <div class="sidebar-section">
     <app-sidebar />
   </div>
-  <router-outlet (activate)="checkSession($event)"></router-outlet>
+  <div class="ro-section">
+    <router-outlet (activate)="checkSession($event)"></router-outlet>
+  </div>
 </div>
