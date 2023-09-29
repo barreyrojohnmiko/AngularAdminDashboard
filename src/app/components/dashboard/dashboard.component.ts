@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { DashboardPanelsObject } from 'src/app/objects/interface/DashboardPanelsObject';
 import { DashboardPanelsData } from 'src/app/objects/data/DashboardPanelsData';
+
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   dashboardPanelsData = new DashboardPanelsData();
   username = 'Miko';
 
-  constructor() {}
+  constructor(public dataService: DataService) {}
 
   get dashboardPanels(): DashboardPanelsObject[] {
     return this.dashboardPanelsData.dashboardPanels;
@@ -28,5 +30,15 @@ export class DashboardComponent {
     return (
       integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + decimalPart
     );
+  }
+
+  getSales(): void {
+    this.dataService.getListOfSales().subscribe((result) => {
+      console.log('sales: ', result);
+    });
+  }
+
+  ngOnInit(): void {
+    this.getSales();
   }
 }
