@@ -8,18 +8,17 @@ export class DashboardPanelsData {
       {
         label: 'Revenue Day Ratio',
         count: 87000,
-      },
-      {
-        label: 'Total Sales',
-        count: 87001,
+        icon: 'fa-wallet',
       },
       {
         label: 'Total Profit',
-        count: 87002,
+        count: 87001,
+        icon: 'fa-receipt',
       },
       {
         label: 'Total Users',
-        count: 87003  ,
+        count: 87003,
+        icon: 'fa-user',
       },
     ];
   }

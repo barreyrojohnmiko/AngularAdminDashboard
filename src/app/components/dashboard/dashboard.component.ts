@@ -17,4 +17,16 @@ export class DashboardComponent {
   get dashboardPanels(): DashboardPanelsObject[] {
     return this.dashboardPanelsData.dashboardPanels;
   }
+
+  formatNumber(input: number) {
+    const numericValue = input.toString().replace(/[^0-9]/g, '');
+
+    const length = numericValue.length;
+    const integerPart = numericValue.substring(0, length - 2);
+    const decimalPart = numericValue.substring(length - 2, length);
+
+    return (
+      integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + decimalPart
+    );
+  }
 }

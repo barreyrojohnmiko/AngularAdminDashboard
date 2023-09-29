@@ -12,11 +12,13 @@
     <div class="panel-container">
       <div class="panel-section" *ngFor="let panel of dashboardPanels">
         <div class="panel-left-side">
-          <div class="panel-label">{{ panel.label }}</div>
-          <div class="panel-count">{{ panel.count }}</div>
+          <div class="panel-label">{{ panel.label | uppercase }}</div>
+          <div class="panel-count">${{ formatNumber(panel.count) }}</div>
         </div>
         <div class="panel-right-side">
-          <div class="panel-icon"></div>
+          <div class="panel-icon">
+            <i class="fa-solid icons fa-solid {{ panel.icon }}"></i>
+          </div>
         </div>
       </div>
     </div>
