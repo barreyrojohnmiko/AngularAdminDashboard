@@ -13,6 +13,7 @@ import { DataService } from 'src/app/services/data.service';
 export class DashboardComponent implements OnInit {
   dashboardPanelsData = new DashboardPanelsData();
   username = 'Miko';
+  sales: any = [];
 
   constructor(public dataService: DataService) {}
 
@@ -34,7 +35,7 @@ export class DashboardComponent implements OnInit {
 
   getSales(): void {
     this.dataService.getListOfSales().subscribe((result) => {
-      console.log('sales: ', result);
+      this.sales = result;
     });
   }
 

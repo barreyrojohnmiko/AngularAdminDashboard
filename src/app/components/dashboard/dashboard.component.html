@@ -1,5 +1,5 @@
 <div class="dashboard-main-container">
-  <div class="header-container">
+  <div class="header-container container-p">
     <header>Hello, {{ username }}. 👋</header>
 
     <div class="search-bar-container">
@@ -8,19 +8,35 @@
     </div>
   </div>
 
-  <div class="data-container">
-    <div class="panel-container">
-      <div class="panel-section" *ngFor="let panel of dashboardPanels">
-        <div class="panel-left-side">
-          <div class="panel-label">{{ panel.label | uppercase }}</div>
-          <div class="panel-count">${{ formatNumber(panel.count) }}</div>
-        </div>
-        <div class="panel-right-side">
-          <div class="panel-icon">
-            <i class="fa-solid icons fa-solid {{ panel.icon }}"></i>
-          </div>
+  <div class="panel-container container-p">
+    <div class="panel-section" *ngFor="let panel of dashboardPanels">
+      <div class="panel-left-side">
+        <div class="panel-label">{{ panel.label | uppercase }}</div>
+        <div class="panel-count">${{ formatNumber(panel.count) }}</div>
+      </div>
+      <div class="panel-right-side">
+        <div class="panel-icon">
+          <i class="fa-solid icons fa-solid {{ panel.icon }}"></i>
         </div>
       </div>
     </div>
   </div>
+
+  <table class="sales-container container-p">
+    <caption>
+      Sales Data
+    </caption>
+    <tr>
+      <th class="header-cell">ID</th>
+      <th class="header-cell">Customer Name</th>
+      <th class="header-cell">Location</th>
+      <th class="header-cell">Amount</th>
+    </tr>
+    <tr *ngFor="let sale of sales">
+      <td class="item-cell">{{ sale.id }}</td>
+      <td class="item-cell">{{ sale.customerName }}</td>
+      <td class="item-cell">{{ sale.location }}</td>
+      <td class="item-cell">{{ sale.amount }}</td>
+    </tr>
+  </table>
 </div>
