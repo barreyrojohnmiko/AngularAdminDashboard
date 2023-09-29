@@ -23,7 +23,7 @@
   </div>
 
   <table class="sales-container container-p">
-    <caption>
+    <caption class="">
       Sales Data
     </caption>
     <tr>
@@ -32,7 +32,7 @@
       <th class="header-cell">Location</th>
       <th class="header-cell">Amount</th>
     </tr>
-    <tr *ngFor="let sale of sales">
+    <tr *ngFor="let sale of sales" class="data-row">
       <td class="item-cell">{{ sale.id }}</td>
       <td class="item-cell">{{ sale.customerName }}</td>
       <td class="item-cell">{{ sale.location }}</td>
