@@ -22,21 +22,29 @@
     </div>
   </div>
 
-  <table class="sales-container container-p">
-    <caption class="">
-      Sales Data
-    </caption>
-    <tr>
-      <th class="header-cell">ID</th>
-      <th class="header-cell">Customer Name</th>
-      <th class="header-cell">Location</th>
-      <th class="header-cell">Amount</th>
-    </tr>
-    <tr *ngFor="let sale of sales" class="data-row">
-      <td class="item-cell">{{ sale.id }}</td>
-      <td class="item-cell">{{ sale.customerName }}</td>
-      <td class="item-cell">{{ sale.location }}</td>
-      <td class="item-cell">{{ sale.amount }}</td>
-    </tr>
-  </table>
+  <div class="sales-container">
+    <header>Sales</header>
+
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="header-cell">ID</th>
+            <th class="header-cell">Customer Name</th>
+            <th class="header-cell">Location</th>
+            <th class="header-cell">Amount</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let sale of sales">
+            <td class="item-cell">{{ sale.id }}</td>
+            <td class="item-cell">{{ sale.customerName }}</td>
+            <td class="item-cell">{{ sale.location }}</td>
+            <td class="item-cell">₱{{ formatNumber(sale.amount) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

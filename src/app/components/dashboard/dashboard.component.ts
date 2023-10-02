@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DashboardPanelsObject } from 'src/app/objects/interface/DashboardPanelsObject';
 import { DashboardPanelsData } from 'src/app/objects/data/DashboardPanelsData';
+import { DashboardPanelsObject } from 'src/app/objects/interface/DashboardPanelsObject';
 
 import { DataService } from 'src/app/services/data.service';
 
@@ -22,15 +22,21 @@ export class DashboardComponent implements OnInit {
   }
 
   formatNumber(input: number) {
-    const numericValue = input.toString().replace(/[^0-9]/g, '');
+    let formattedNumber = input.toString();
 
-    const length = numericValue.length;
-    const integerPart = numericValue.substring(0, length - 2);
-    const decimalPart = numericValue.substring(length - 2, length);
+    // Add commas for thousands
+    formattedNumber = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-    return (
-      integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.' + decimalPart
-    );
+    // Split the number into integer and decimal parts
+    const parts = formattedNumber.split('.');
+
+    if (parts.length > 1) {
+      parts[1] = parts[1].substring(0, 2); // If there's a decimal part, ensure it has two decimal places
+    } else {
+      parts.push('00'); // If there's no decimal part, add ".00"
+    }
+
+    return parts.join('.');
   }
 
   getSales(): void {
