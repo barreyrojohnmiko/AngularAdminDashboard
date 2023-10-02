@@ -11,6 +11,8 @@ export class DashboardComponent implements OnInit {
   username = 'Miko';
   sales: any = [];
   totalProfit: number = 0;
+  transactionCount: number = 0;
+  todayProfit: number = 0;
 
   constructor(public dataService: DataService) {}
 
@@ -36,14 +38,27 @@ export class DashboardComponent implements OnInit {
     this.dataService.getListOfSales().subscribe((result) => {
       // Check if the result is an array, if not, convert it to an array
       const salesData = Array.isArray(result) ? result : [result];
-
-      // Assign the sales data
       this.sales = salesData;
 
-      // Calculate the sum of sales amounts
-      const sum = this.calculateSum(salesData);
-      this.totalProfit = sum;
+      this.handlePanelsData();
     });
+  }
+
+  calculateSumForToday(salesData: any[]): number {
+    const today = new Date(); // Get today's date
+    const todayDateString = today.toISOString().split('T')[0]; // Convert to "yyyy-MM-dd" format
+
+    let sum = 0;
+
+    for (const sale of salesData) {
+      const createdAtDateString = sale.createdAt.split('T')[0]; // Extract the date part
+      if (createdAtDateString === todayDateString) {
+        // If the date matches today's date, add the amount to the sum
+        sum += parseFloat(sale.amount);
+      }
+    }
+
+    return sum;
   }
 
   calculateSum(salesData: any[]): number {
@@ -64,6 +79,17 @@ export class DashboardComponent implements OnInit {
     }
 
     return sum;
+  }
+
+  handlePanelsData(): void {
+    const sum = this.calculateSum(this.sales);
+    this.totalProfit = sum;
+
+    const idCount = this.sales.length;
+    this.transactionCount = idCount;
+
+    const todaySum = this.calculateSumForToday(this.sales);
+    this.todayProfit = todaySum;
   }
 
   ngOnInit(): void {
