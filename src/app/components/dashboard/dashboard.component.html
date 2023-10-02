@@ -9,14 +9,38 @@
   </div>
 
   <div class="panel-container container-p">
-    <div class="panel-section" *ngFor="let panel of dashboardPanels">
+    <div class="panel-section">
       <div class="panel-left-side">
-        <div class="panel-label">{{ panel.label | uppercase }}</div>
-        <div class="panel-count">${{ formatNumber(panel.count) }}</div>
+        <div class="panel-label">Revenue Day Ratio</div>
+        <div class="panel-count">870000</div>
       </div>
       <div class="panel-right-side">
         <div class="panel-icon">
-          <i class="fa-solid icons fa-solid {{ panel.icon }}"></i>
+          <i class="fa-solid icons fa-solid fa-wallet"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-left-side">
+        <div class="panel-label">Total Profit</div>
+        <div class="panel-count">₱{{ formatNumber(totalProfit) }}</div>
+      </div>
+      <div class="panel-right-side">
+        <div class="panel-icon">
+          <i class="fa-solid icons fa-solid fa-receipt"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-left-side">
+        <div class="panel-label">Total Users</div>
+        <div class="panel-count">₱{{ formatNumber(totalProfit) }}</div>
+      </div>
+      <div class="panel-right-side">
+        <div class="panel-icon">
+          <i class="fa-solid icons fa-solid fa-user"></i>
         </div>
       </div>
     </div>
