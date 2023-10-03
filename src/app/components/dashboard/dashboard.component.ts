@@ -16,6 +16,16 @@ export class DashboardComponent implements OnInit {
 
   constructor(public dataService: DataService) {}
 
+  getSales(): void {
+    this.dataService.getListOfSales().subscribe((result) => {
+      // Check if the result is an array, if not, convert it to an array
+      const salesData = Array.isArray(result) ? result : [result];
+      this.sales = salesData;
+
+      this.handlePanelsData();
+    });
+  }
+
   formatNumber(input: number) {
     let formattedNumber = input.toString();
 
@@ -34,17 +44,7 @@ export class DashboardComponent implements OnInit {
     return parts.join('.');
   }
 
-  getSales(): void {
-    this.dataService.getListOfSales().subscribe((result) => {
-      // Check if the result is an array, if not, convert it to an array
-      const salesData = Array.isArray(result) ? result : [result];
-      this.sales = salesData;
-
-      this.handlePanelsData();
-    });
-  }
-
-  calculateSumForToday(salesData: any[]): number {
+  calculateTodaySum(salesData: any[]): number {
     const today = new Date(); // Get today's date
     const todayDateString = today.toISOString().split('T')[0]; // Convert to "yyyy-MM-dd" format
 
@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
     return sum;
   }
 
-  calculateSum(salesData: any[]): number {
+  calculateTotalSum(salesData: any[]): number {
     let sum = 0;
 
     for (const sale of salesData) {
@@ -82,13 +82,13 @@ export class DashboardComponent implements OnInit {
   }
 
   handlePanelsData(): void {
-    const sum = this.calculateSum(this.sales);
+    const sum = this.calculateTotalSum(this.sales);
     this.totalProfit = sum;
 
     const idCount = this.sales.length;
     this.transactionCount = idCount;
 
-    const todaySum = this.calculateSumForToday(this.sales);
+    const todaySum = this.calculateTodaySum(this.sales);
     this.todayProfit = todaySum;
   }
 
