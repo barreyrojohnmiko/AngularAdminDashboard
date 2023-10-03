@@ -138,30 +138,32 @@ export class DashboardComponent implements OnInit {
 
   sortData(column: string, isDescending: boolean): void {
     this.sales.sort((a: any, b: any) => {
-      if (column === 'id') {
-        return isDescending ? a.id - b.id : b.id - a.id;
-      } else if (column === 'date') {
-        const dateA = new Date(a.createdAt);
-        const dateB = new Date(b.createdAt);
-        return isDescending
-          ? dateA.getTime() - dateB.getTime()
-          : dateB.getTime() - dateA.getTime();
-      } else if (column === 'customerName') {
-        const nameA = a.customerName.toLowerCase();
-        const nameB = b.customerName.toLowerCase();
-        return isDescending
-          ? nameA.localeCompare(nameB)
-          : nameB.localeCompare(nameA);
-      } else if (column === 'amount') {
-        return isDescending ? a.amount - b.amount : b.amount - a.amount;
-      } else if (column === 'location') {
-        const locationA = a.location.toLowerCase();
-        const locationB = b.location.toLowerCase();
-        return isDescending
-          ? locationA.localeCompare(locationB)
-          : locationB.localeCompare(locationA);
+      switch (column) {
+        case 'id':
+          return isDescending ? a.id - b.id : b.id - a.id;
+        case 'date':
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          return isDescending
+            ? dateA.getTime() - dateB.getTime()
+            : dateB.getTime() - dateA.getTime();
+        case 'customerName':
+          const nameA = a.customerName.toLowerCase();
+          const nameB = b.customerName.toLowerCase();
+          return isDescending
+            ? nameA.localeCompare(nameB)
+            : nameB.localeCompare(nameA);
+        case 'amount':
+          return isDescending ? a.amount - b.amount : b.amount - a.amount;
+        case 'location':
+          const locationA = a.location.toLowerCase();
+          const locationB = b.location.toLowerCase();
+          return isDescending
+            ? locationA.localeCompare(locationB)
+            : locationB.localeCompare(locationA);
+        default:
+          return 0;
       }
-      return 0;
     });
   }
 }
