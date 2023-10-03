@@ -113,52 +113,55 @@ export class DashboardComponent implements OnInit {
     switch (column) {
       case 'id':
         this.isIdDescending = !this.isIdDescending;
-
-        this.sales.sort((a: any, b: any) => {
-          return this.isIdDescending ? a.id - b.id : b.id - a.id;
-        });
+        this.sortData('id', this.isIdDescending);
         break;
       case 'date':
         this.isDateDescending = !this.isDateDescending;
-
-        this.sales.sort((a: any, b: any) => {
-          const dateA: any = new Date(a.createdAt);
-          const dateB: any = new Date(b.createdAt);
-          return this.isDateDescending ? dateA - dateB : dateB - dateA;
-        });
+        this.sortData('date', this.isDateDescending);
         break;
       case 'customerName':
         this.isCustomerNameDescending = !this.isCustomerNameDescending;
-
-        this.sales.sort((a: any, b: any) => {
-          const nameA = a.customerName.toLowerCase();
-          const nameB = b.customerName.toLowerCase();
-          return this.isCustomerNameDescending
-            ? nameA.localeCompare(nameB)
-            : nameB.localeCompare(nameA);
-        });
+        this.sortData('customerName', this.isCustomerNameDescending);
         break;
       case 'amount':
         this.isAmountDescending = !this.isAmountDescending;
-        this.sales.sort((a: any, b: any) => {
-          return this.isAmountDescending
-            ? a.amount - b.amount
-            : b.amount - a.amount;
-        });
+        this.sortData('amount', this.isAmountDescending);
         break;
       case 'location':
         this.isLocationDescending = !this.isLocationDescending;
-
-        this.sales.sort((a: any, b: any) => {
-          const locationA = a.location.toLowerCase();
-          const locationB = b.location.toLowerCase();
-          return this.isLocationDescending
-            ? locationA.localeCompare(locationB)
-            : locationB.localeCompare(locationA);
-        });
+        this.sortData('location', this.isLocationDescending);
         break;
       default:
         break;
     }
+  }
+
+  sortData(column: string, isDescending: boolean): void {
+    this.sales.sort((a: any, b: any) => {
+      if (column === 'id') {
+        return isDescending ? a.id - b.id : b.id - a.id;
+      } else if (column === 'date') {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
+        return isDescending
+          ? dateA.getTime() - dateB.getTime()
+          : dateB.getTime() - dateA.getTime();
+      } else if (column === 'customerName') {
+        const nameA = a.customerName.toLowerCase();
+        const nameB = b.customerName.toLowerCase();
+        return isDescending
+          ? nameA.localeCompare(nameB)
+          : nameB.localeCompare(nameA);
+      } else if (column === 'amount') {
+        return isDescending ? a.amount - b.amount : b.amount - a.amount;
+      } else if (column === 'location') {
+        const locationA = a.location.toLowerCase();
+        const locationB = b.location.toLowerCase();
+        return isDescending
+          ? locationA.localeCompare(locationB)
+          : locationB.localeCompare(locationA);
+      }
+      return 0;
+    });
   }
 }
