@@ -117,6 +117,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 400px;
+    scroll-snap-type: y mandatory;
 
     .data-table {
       width: 100%;
@@ -138,6 +139,11 @@
           font-weight: 600;
           font-size: 14px;
           color: #a7a7a7;
+
+          .icons {
+            margin-left: 5px;
+            cursor: pointer;
+          }
         }
       }
 
