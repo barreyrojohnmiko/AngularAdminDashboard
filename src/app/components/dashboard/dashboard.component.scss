@@ -105,12 +105,53 @@
   flex-direction: column;
   align-items: stretch;
 
-  header {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    color: #000000;
-    margin-bottom: 15px;
+  .sales-header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    header {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      color: #000000;
+      margin-bottom: 15px;
+    }
+
+    .time-span-container {
+      width: 20%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+      font-size: 14px;
+
+      .today-section {
+        padding: 5px 0;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      .weekly-section {
+        padding: 5px 0;
+      }
+
+      .monthly-section {
+        padding: 5px 0;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+
+      .tab-active {
+        background-color: #111111;
+        color: #ffffff;
+      }
+
+      .tab-inactive {
+        background-color: #f8f8f8;
+        color: #000000;
+      }
+    }
   }
 
   .table-container {

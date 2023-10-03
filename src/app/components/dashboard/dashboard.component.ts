@@ -19,9 +19,12 @@ export class DashboardComponent implements OnInit {
   isIdDescending: boolean = true;
   isDateDescending: boolean = true;
   isCustomerNameDescending: boolean = true;
+  isLocationDescending: boolean = true;
   isAmountDescending: boolean = true;
 
-  isLocationDescending: boolean = true;
+  isTodayTabClicked: boolean = false;
+  isWeeklyTabClicked: boolean = false;
+  isMonthlyTabClicked: boolean = false;
 
   constructor(public dataService: DataService) {}
 
@@ -165,5 +168,23 @@ export class DashboardComponent implements OnInit {
           return 0;
       }
     });
+  }
+
+  toggleTodayTab(): void {
+    this.isTodayTabClicked = true;
+    this.isWeeklyTabClicked = false;
+    this.isMonthlyTabClicked = false;
+  }
+
+  toggleWeeklyTab(): void {
+    this.isTodayTabClicked = false;
+    this.isWeeklyTabClicked = true;
+    this.isMonthlyTabClicked = false;
+  }
+
+  toggleMonthlyTab(): void {
+    this.isTodayTabClicked = false;
+    this.isWeeklyTabClicked = false;
+    this.isMonthlyTabClicked = true;
   }
 }

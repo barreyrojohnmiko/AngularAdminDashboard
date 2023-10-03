@@ -49,7 +49,15 @@
   </div>
 
   <div class="sales-container">
-    <header>Sales</header>
+    <div class="sales-header-container">
+      <header>Sales</header>
+
+      <div class="time-span-container">
+        <div (click)="toggleTodayTab()" class="today-section" [ngClass]="{'tab-active': isTodayTabClicked, 'tab-inactive': !isTodayTabClicked}">Today</div>
+        <div (click)="toggleWeeklyTab()" class="weekly-section" [ngClass]="{'tab-active': isWeeklyTabClicked, 'tab-inactive': !isWeeklyTabClicked}">Weekly</div>
+        <div (click)="toggleMonthlyTab()" class="monthly-section" [ngClass]="{'tab-active': isMonthlyTabClicked, 'tab-inactive': !isMonthlyTabClicked}">Monthly</div>
+      </div>
+    </div>
 
     <div class="table-container">
       <table class="data-table">
