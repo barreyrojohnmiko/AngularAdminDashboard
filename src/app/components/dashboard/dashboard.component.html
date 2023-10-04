@@ -53,6 +53,9 @@
       <header>Sales</header>
 
       <div class="time-span-container">
+        <div class="reload-section">
+          <i class="fa-solid fa-arrows-rotate" [ngClass]="{'rotate': isRotateIconClicked}" (click)="handleDataReset()"></i>
+        </div>
         <div (click)="toggleTab('today')" class="today-section" [ngClass]="{'tab-active': isTodayTabClicked, 'tab-inactive': !isTodayTabClicked}">Today</div>
         <div (click)="toggleTab('weekly')" class="weekly-section" [ngClass]="{'tab-active': isWeeklyTabClicked, 'tab-inactive': !isWeeklyTabClicked}">This Week</div>
         <div (click)="toggleTab('monthly')" class="monthly-section" [ngClass]="{'tab-active': isMonthlyTabClicked, 'tab-inactive': !isMonthlyTabClicked}">This Month</div>

@@ -120,23 +120,41 @@
     }
 
     .time-span-container {
-      width: 25%;
+      width: 30%;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(7, 1fr);
       text-align: center;
+      align-items: center;
       font-size: 14px;
 
+      .reload-section {
+        text-align: center;
+        grid-column: span 1;
+        cursor: pointer;
+
+        .fa-arrows-rotate {
+          transition: transform 0.3s;
+        }
+
+        .rotate {
+          transform: rotate(360deg);
+        }
+      }
+
       .today-section {
+        grid-column: span 2;
         padding: 5px 0;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
       }
 
       .weekly-section {
+        grid-column: span 2;
         padding: 5px 0;
       }
 
       .monthly-section {
+        grid-column: span 2;
         padding: 5px 0;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -200,4 +218,9 @@
       }
     }
   }
+}
+
+.left-section {
+  display: flex;
+  flex-direction: row;
 }

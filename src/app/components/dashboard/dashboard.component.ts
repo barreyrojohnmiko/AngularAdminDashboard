@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-// import * as moment from 'moment';
 import * as moment from 'moment-timezone';
 
 import { DataService } from 'src/app/services/data.service';
@@ -27,6 +26,8 @@ export class DashboardComponent implements OnInit {
   isTodayTabClicked: boolean = false;
   isWeeklyTabClicked: boolean = false;
   isMonthlyTabClicked: boolean = false;
+
+  isRotateIconClicked: boolean = false;
 
   constructor(public dataService: DataService) {}
 
@@ -62,11 +63,6 @@ export class DashboardComponent implements OnInit {
 
     return parts.join('.');
   }
-
-  // formatDate(date: string): string {
-  //   const utcDate = moment.utc(date);
-  //   return utcDate.format('MMM. D, YYYY');
-  // }
 
   formatDate(date: string): string {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -112,13 +108,13 @@ export class DashboardComponent implements OnInit {
   }
 
   handlePanelsData(): void {
-    const sum = this.calculateTotalSum(this.sales);
+    const sum = this.calculateTotalSum(this.filteredData);
     this.totalProfit = sum;
 
-    const idCount = this.sales.length;
+    const idCount = this.filteredData.length;
     this.transactionCount = idCount;
 
-    const todaySum = this.calculateTodaySum(this.sales);
+    const todaySum = this.calculateTodaySum(this.filteredData);
     this.todayProfit = todaySum;
   }
 
@@ -249,5 +245,15 @@ export class DashboardComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  handleDataReset() {
+    this.isRotateIconClicked = !this.isRotateIconClicked;
+    this.isIdDescending = true;
+    this.isDateDescending = true;
+    this.isCustomerNameDescending = true;
+    this.isLocationDescending = true;
+    this.isAmountDescending = true;
+    this.filteredData = this.sales;
   }
 }
