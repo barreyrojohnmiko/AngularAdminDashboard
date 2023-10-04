@@ -200,6 +200,7 @@ export class DashboardComponent implements OnInit {
         this.isTodayTabClicked = false;
         this.isWeeklyTabClicked = false;
         this.isMonthlyTabClicked = true;
+        this.filterDataByTimeSpan('monthly');
         break;
 
       default:
@@ -212,11 +213,13 @@ export class DashboardComponent implements OnInit {
     const todayStart = moment.tz(userTimeZone).startOf('day');
     const todayEnd = moment(todayStart).endOf('day');
 
+    console.log(`User's Time Zone: `, userTimeZone);
+
     switch (timespan) {
       case 'today':
         this.filteredData = this.sales.filter((item: any) => {
-          const createdAt = moment.tz(item.createdAt, 'UTC'); // Assume API provides dates in UTC
-          const userCreatedAt = createdAt.clone().tz(userTimeZone); // Convert API date to user's time zone
+          const createdAt = moment.tz(item.createdAt, userTimeZone);
+          const userCreatedAt = createdAt.clone().tz(userTimeZone);
 
           return userCreatedAt.isBetween(todayStart, todayEnd);
         });
@@ -226,13 +229,23 @@ export class DashboardComponent implements OnInit {
         const sixDaysAgo = todayStart.clone().subtract(6, 'days');
 
         this.filteredData = this.sales.filter((item: any) => {
-          const createdAt = moment.tz(item.createdAt, 'UTC');
+          const createdAt = moment.tz(item.createdAt, userTimeZone);
           const userCreatedAt = createdAt.clone().tz(userTimeZone);
 
           return userCreatedAt.isBetween(sixDaysAgo, endOfWeek);
         });
         break;
+      case 'monthly':
+        const year = todayStart.year();
+        const month = todayStart.month();
+        const startOfMonth = moment.tz([year, month], userTimeZone);
+        const endOfMonth = startOfMonth.clone().endOf('month');
 
+        this.filteredData = this.sales.filter((item: any) => {
+          const createdAt = moment.tz(item.createdAt, userTimeZone);
+          return createdAt.isBetween(startOfMonth, endOfMonth, null, '[]');
+        });
+        break;
       default:
         break;
     }
