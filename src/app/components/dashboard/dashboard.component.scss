@@ -10,6 +10,13 @@
   padding: 0 30px;
 }
 
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
 .header-container {
   display: flex;
   flex-direction: row;
@@ -214,6 +221,8 @@
           font-weight: 300;
           font-size: 14px;
           color: #000000;
+          max-width: 70%; 
+          white-space: nowrap;
         }
       }
     }

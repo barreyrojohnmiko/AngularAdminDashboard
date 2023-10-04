@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   isIdDescending: boolean = true;
   isDateDescending: boolean = true;
+  isProductDescending: boolean = true;
   isCustomerNameDescending: boolean = true;
   isLocationDescending: boolean = true;
   isAmountDescending: boolean = true;
@@ -71,6 +72,14 @@ export class DashboardComponent implements OnInit {
     const localDate = moment.tz(date, userTimeZone);
     return localDate.format('MMM. D, YYYY');
   }
+
+  // truncateText(text: string, maxLength: number): string {
+  //   if (text.length <= maxLength) {
+  //     return text;
+  //   } else {
+  //     return text.substr(0, maxLength - 3) + '...';
+  //   }
+  // }
 
   calculateTodaySum(salesData: any[]): number {
     const today = new Date(); // Get today's date
@@ -130,6 +139,10 @@ export class DashboardComponent implements OnInit {
         this.isDateDescending = !this.isDateDescending;
         this.sortData('date', this.isDateDescending);
         break;
+      case 'product':
+        this.isProductDescending = !this.isProductDescending;
+        this.sortData('product', this.isProductDescending);
+        break;
       case 'customerName':
         this.isCustomerNameDescending = !this.isCustomerNameDescending;
         this.sortData('customerName', this.isCustomerNameDescending);
@@ -158,6 +171,12 @@ export class DashboardComponent implements OnInit {
           return isDescending
             ? dateA.getTime() - dateB.getTime()
             : dateB.getTime() - dateA.getTime();
+        case 'product':
+          const productA = a.productName.toLowerCase();
+          const productB = b.productName.toLowerCase();
+          return isDescending
+            ? productA.localeCompare(productB)
+            : productB.localeCompare(productA);
         case 'customerName':
           const nameA = a.customerName.toLowerCase();
           const nameB = b.customerName.toLowerCase();
@@ -264,11 +283,8 @@ export class DashboardComponent implements OnInit {
 
   handleSearchInput() {
     this.filteredData = this.sales.filter((sale: any) => {
-      const createdAt = moment(sale.createdAt).format('YYYY-MM-DD');
-
       return (
         sale.id.toString().includes(this.searchInput) ||
-        createdAt.includes(this.searchInput) ||
         sale.customerName
           .toLowerCase()
           .includes(this.searchInput.toLowerCase()) ||
