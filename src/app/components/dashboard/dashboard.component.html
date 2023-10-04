@@ -53,9 +53,9 @@
       <header>Sales</header>
 
       <div class="time-span-container">
-        <div (click)="toggleTodayTab()" class="today-section" [ngClass]="{'tab-active': isTodayTabClicked, 'tab-inactive': !isTodayTabClicked}">Today</div>
-        <div (click)="toggleWeeklyTab()" class="weekly-section" [ngClass]="{'tab-active': isWeeklyTabClicked, 'tab-inactive': !isWeeklyTabClicked}">Weekly</div>
-        <div (click)="toggleMonthlyTab()" class="monthly-section" [ngClass]="{'tab-active': isMonthlyTabClicked, 'tab-inactive': !isMonthlyTabClicked}">Monthly</div>
+        <div (click)="toggleTab('today')" class="today-section" [ngClass]="{'tab-active': isTodayTabClicked, 'tab-inactive': !isTodayTabClicked}">Today</div>
+        <div (click)="toggleTab('weekly')" class="weekly-section" [ngClass]="{'tab-active': isWeeklyTabClicked, 'tab-inactive': !isWeeklyTabClicked}">Weekly</div>
+        <div (click)="toggleTab('monthly')" class="monthly-section" [ngClass]="{'tab-active': isMonthlyTabClicked, 'tab-inactive': !isMonthlyTabClicked}">Monthly</div>
       </div>
     </div>
 
@@ -122,7 +122,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let sale of sales">
+          <tr *ngFor="let sale of filteredData">
             <td class="item-cell">{{ sale.id }}</td>
             <td class="item-cell">{{ formatDate(sale.createdAt) }}</td>
             <td class="item-cell">{{ sale.customerName }}</td>

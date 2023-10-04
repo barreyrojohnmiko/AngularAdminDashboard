@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import * as moment from 'moment';
+// import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 
 import { DataService } from 'src/app/services/data.service';
 
@@ -12,6 +13,7 @@ import { DataService } from 'src/app/services/data.service';
 export class DashboardComponent implements OnInit {
   username = 'Miko';
   sales: any = [];
+  filteredData: any = [];
   totalProfit: number = 0;
   transactionCount: number = 0;
   todayProfit: number = 0;
@@ -33,6 +35,7 @@ export class DashboardComponent implements OnInit {
       // Check if the result is an array, if not, convert it to an array
       const salesData = Array.isArray(result) ? result : [result];
       this.sales = salesData;
+      this.filteredData = salesData;
 
       this.handlePanelsData();
     });
@@ -60,8 +63,15 @@ export class DashboardComponent implements OnInit {
     return parts.join('.');
   }
 
+  // formatDate(date: string): string {
+  //   const utcDate = moment.utc(date);
+  //   return utcDate.format('MMM. D, YYYY');
+  // }
+
   formatDate(date: string): string {
-    return moment(date).format('MMM. D, YYYY');
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const localDate = moment.tz(date, userTimeZone);
+    return localDate.format('MMM. D, YYYY');
   }
 
   calculateTodaySum(salesData: any[]): number {
@@ -170,21 +180,61 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  toggleTodayTab(): void {
-    this.isTodayTabClicked = true;
-    this.isWeeklyTabClicked = false;
-    this.isMonthlyTabClicked = false;
+  toggleTab(timespan: string): void {
+    switch (timespan) {
+      case 'today':
+        this.isTodayTabClicked = true;
+        this.isWeeklyTabClicked = false;
+        this.isMonthlyTabClicked = false;
+        this.filterDataByTimeSpan('today');
+        break;
+
+      case 'weekly':
+        this.isTodayTabClicked = false;
+        this.isWeeklyTabClicked = true;
+        this.isMonthlyTabClicked = false;
+        this.filterDataByTimeSpan('weekly');
+        break;
+
+      case 'monthly':
+        this.isTodayTabClicked = false;
+        this.isWeeklyTabClicked = false;
+        this.isMonthlyTabClicked = true;
+        break;
+
+      default:
+        break;
+    }
   }
 
-  toggleWeeklyTab(): void {
-    this.isTodayTabClicked = false;
-    this.isWeeklyTabClicked = true;
-    this.isMonthlyTabClicked = false;
-  }
+  filterDataByTimeSpan(timespan: string): void {
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const todayStart = moment.tz(userTimeZone).startOf('day');
+    const todayEnd = moment(todayStart).endOf('day');
 
-  toggleMonthlyTab(): void {
-    this.isTodayTabClicked = false;
-    this.isWeeklyTabClicked = false;
-    this.isMonthlyTabClicked = true;
+    switch (timespan) {
+      case 'today':
+        this.filteredData = this.sales.filter((item: any) => {
+          const createdAt = moment.tz(item.createdAt, 'UTC'); // Assume API provides dates in UTC
+          const userCreatedAt = createdAt.clone().tz(userTimeZone); // Convert API date to user's time zone
+
+          return userCreatedAt.isBetween(todayStart, todayEnd);
+        });
+        break;
+      case 'weekly':
+        const endOfWeek = todayEnd;
+        const sixDaysAgo = todayStart.clone().subtract(6, 'days');
+
+        this.filteredData = this.sales.filter((item: any) => {
+          const createdAt = moment.tz(item.createdAt, 'UTC');
+          const userCreatedAt = createdAt.clone().tz(userTimeZone);
+
+          return userCreatedAt.isBetween(sixDaysAgo, endOfWeek);
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 }
