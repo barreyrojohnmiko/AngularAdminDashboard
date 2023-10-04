@@ -29,6 +29,8 @@ export class DashboardComponent implements OnInit {
 
   isRotateIconClicked: boolean = false;
 
+  searchInput: string = '';
+
   constructor(public dataService: DataService) {}
 
   getSales(): void {
@@ -146,7 +148,7 @@ export class DashboardComponent implements OnInit {
   }
 
   sortData(column: string, isDescending: boolean): void {
-    this.sales.sort((a: any, b: any) => {
+    this.filteredData.sort((a: any, b: any) => {
       switch (column) {
         case 'id':
           return isDescending ? a.id - b.id : b.id - a.id;
@@ -254,6 +256,25 @@ export class DashboardComponent implements OnInit {
     this.isCustomerNameDescending = true;
     this.isLocationDescending = true;
     this.isAmountDescending = true;
+    this.isTodayTabClicked = false;
+    this.isWeeklyTabClicked = false;
+    this.isMonthlyTabClicked = false;
     this.filteredData = this.sales;
+  }
+
+  handleSearchInput() {
+    this.filteredData = this.sales.filter((sale: any) => {
+      const createdAt = moment(sale.createdAt).format('YYYY-MM-DD');
+
+      return (
+        sale.id.toString().includes(this.searchInput) ||
+        createdAt.includes(this.searchInput) ||
+        sale.customerName
+          .toLowerCase()
+          .includes(this.searchInput.toLowerCase()) ||
+        sale.location.toLowerCase().includes(this.searchInput.toLowerCase()) ||
+        sale.amount.toString().includes(this.searchInput)
+      );
+    });
   }
 }

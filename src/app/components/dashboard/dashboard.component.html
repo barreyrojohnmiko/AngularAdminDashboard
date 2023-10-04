@@ -4,7 +4,7 @@
 
     <div class="search-bar-container">
       <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" placeholder="Search..." class="search-input" />
+      <input [(ngModel)]="searchInput" type="text" placeholder="Search..." class="search-input" (ngModelChange)="handleSearchInput()" />
     </div>
   </div>
 
