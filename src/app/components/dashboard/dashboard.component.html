@@ -3,7 +3,11 @@
     <header>Hello, {{ username }}. 👋</header>
 
     <div class="header-container-right-side">
-      <i class="fa-solid fa-bell"></i>
+      <div class="icon-container">
+        <i class="fa-solid fa-bell"></i>
+        <div class="notification-badge" *ngIf="isNotification"></div>
+      </div>
+
       <div class="search-bar-container">
         <select
           class="category-select"
