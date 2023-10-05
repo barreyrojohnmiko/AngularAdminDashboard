@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 
 import { AuthGuard, AuthGuardLogin } from './auth.guard';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,13 @@ import { AuthGuard, AuthGuardLogin } from './auth.guard';
       { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       { path: '**', redirectTo: '/dashboard' }
-    ])
+    ]),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [AuthGuard, AuthGuardLogin],
   bootstrap: [AppComponent],
