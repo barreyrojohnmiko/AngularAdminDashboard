@@ -1,0 +1,109 @@
+{
+  "configVersion": 1,
+  "timestamp": 1696495038058,
+  "index": "/AngularAdminDashboard/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/AngularAdminDashboard/favicon.ico",
+        "/AngularAdminDashboard/index.html",
+        "/AngularAdminDashboard/main.e6692af2cfaa5a1f.js",
+        "/AngularAdminDashboard/manifest.webmanifest",
+        "/AngularAdminDashboard/polyfills.64f5958a1f1c33cb.js",
+        "/AngularAdminDashboard/runtime.120f7f2cd5e88584.js",
+        "/AngularAdminDashboard/styles.5aa0e50d3fd2349f.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/AngularAdminDashboard/assets/icons/icon-128x128.png",
+        "/AngularAdminDashboard/assets/icons/icon-144x144.png",
+        "/AngularAdminDashboard/assets/icons/icon-152x152.png",
+        "/AngularAdminDashboard/assets/icons/icon-192x192.png",
+        "/AngularAdminDashboard/assets/icons/icon-384x384.png",
+        "/AngularAdminDashboard/assets/icons/icon-512x512.png",
+        "/AngularAdminDashboard/assets/icons/icon-72x72.png",
+        "/AngularAdminDashboard/assets/icons/icon-96x96.png",
+        "/AngularAdminDashboard/assets/images/GDPR-amico.png",
+        "/AngularAdminDashboard/assets/images/TMG.png",
+        "/AngularAdminDashboard/fa-brands-400.5f7c5bb77eae788b.ttf",
+        "/AngularAdminDashboard/fa-brands-400.9210030c21e68a90.woff2",
+        "/AngularAdminDashboard/fa-regular-400.02ad4ff91ef84f65.woff2",
+        "/AngularAdminDashboard/fa-regular-400.570a165b064c1468.ttf",
+        "/AngularAdminDashboard/fa-solid-900.0b5caff7ad4bc179.ttf",
+        "/AngularAdminDashboard/fa-solid-900.3eae9857c06e9372.woff2",
+        "/AngularAdminDashboard/fa-v4compatibility.6209cf0172d95b0e.woff2",
+        "/AngularAdminDashboard/fa-v4compatibility.92dce52f885fd838.ttf",
+        "/AngularAdminDashboard/primeicons.0112589c5695a9ed.ttf",
+        "/AngularAdminDashboard/primeicons.943ab24c43224d29.svg",
+        "/AngularAdminDashboard/primeicons.ba3f916dfb64be8c.woff2",
+        "/AngularAdminDashboard/primeicons.f8b9e8a4e401b603.woff"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/AngularAdminDashboard/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/AngularAdminDashboard/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/AngularAdminDashboard/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/AngularAdminDashboard/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/AngularAdminDashboard/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/AngularAdminDashboard/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/AngularAdminDashboard/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/AngularAdminDashboard/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/AngularAdminDashboard/assets/images/GDPR-amico.png": "43f1630fddc2e49cd02287111b52425d737d4693",
+    "/AngularAdminDashboard/assets/images/TMG.png": "51f349ac51e56706dc05b6f74541d38d5d9bc1c7",
+    "/AngularAdminDashboard/fa-brands-400.5f7c5bb77eae788b.ttf": "f0982a77285d53653845b0a78170b4688db972f1",
+    "/AngularAdminDashboard/fa-brands-400.9210030c21e68a90.woff2": "4350f9ba93384634faf35f41c503c99c767f1069",
+    "/AngularAdminDashboard/fa-regular-400.02ad4ff91ef84f65.woff2": "fb363d27cfdfe71a243fa2ac3dab2815232b9b7e",
+    "/AngularAdminDashboard/fa-regular-400.570a165b064c1468.ttf": "67afa6237670ab99125056f2899129f22912dcf3",
+    "/AngularAdminDashboard/fa-solid-900.0b5caff7ad4bc179.ttf": "20bd663830188cbadd2264e1daf9497c3ffc3621",
+    "/AngularAdminDashboard/fa-solid-900.3eae9857c06e9372.woff2": "6b99aa650bd12a36caa14e0127435d8f4cd3ba73",
+    "/AngularAdminDashboard/fa-v4compatibility.6209cf0172d95b0e.woff2": "8f80d0bbe995f7fe92320fdaec10cd5ccd710a51",
+    "/AngularAdminDashboard/fa-v4compatibility.92dce52f885fd838.ttf": "a9d072aca9e0fadc2a7167671ce3d6b18d9cd2cc",
+    "/AngularAdminDashboard/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/AngularAdminDashboard/index.html": "e8387e03d522e9dfdc83f56357e218490d098e48",
+    "/AngularAdminDashboard/main.e6692af2cfaa5a1f.js": "91a7113014532f236bad6ab424d085b22602dc93",
+    "/AngularAdminDashboard/manifest.webmanifest": "dcdb3c765bb61db485d964880106589b7279ff02",
+    "/AngularAdminDashboard/polyfills.64f5958a1f1c33cb.js": "d879cd49a5585db49c2a1211e20a66bd3e336f1a",
+    "/AngularAdminDashboard/primeicons.0112589c5695a9ed.ttf": "ceeb46d594fde5cc507cdf8b70e38e78fe47653c",
+    "/AngularAdminDashboard/primeicons.943ab24c43224d29.svg": "d3332a45242b8f6edbf3f3c7176a280e7edcd961",
+    "/AngularAdminDashboard/primeicons.ba3f916dfb64be8c.woff2": "55a4b2a5f02e362405d8d874903af0b5f6a6c15d",
+    "/AngularAdminDashboard/primeicons.f8b9e8a4e401b603.woff": "b1648b50be13350fde8b5d9a6fe78354ddcc43e4",
+    "/AngularAdminDashboard/runtime.120f7f2cd5e88584.js": "f4a8949e53ff85ac82acfa5732915dc7026e96cd",
+    "/AngularAdminDashboard/styles.5aa0e50d3fd2349f.css": "744d25c53d8749a982259d927fb3d1254c43c9f7"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
