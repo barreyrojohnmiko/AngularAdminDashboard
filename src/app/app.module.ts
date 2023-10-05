@@ -32,16 +32,24 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     CarouselModule,
     ButtonModule,
     RouterModule.forRoot([
-      { path: 'login', component: LoginComponent, canActivate: [AuthGuardLogin] },
-      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-      { path: '**', redirectTo: '/dashboard' }
+      {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [AuthGuardLogin],
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+      },
+      { path: '**', redirectTo: '/dashboard' },
     ]),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    })
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   providers: [AuthGuard, AuthGuardLogin],
   bootstrap: [AppComponent],

@@ -4,6 +4,8 @@ import * as moment from 'moment-timezone';
 
 import { DataService } from 'src/app/services/data.service';
 
+import { PushNotificationService } from 'src/app/services/push-notification.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -28,13 +30,16 @@ export class DashboardComponent implements OnInit {
   isWeeklyTabClicked: boolean = false;
   isMonthlyTabClicked: boolean = false;
 
-  isNotification: boolean = true
+  isNotification: boolean = true;
   isRotateIconClicked: boolean = false;
 
   searchInput: string = '';
   categoryPicked: string = 'productName';
 
-  constructor(public dataService: DataService) {}
+  constructor(
+    public dataService: DataService,
+    public pushNotification: PushNotificationService
+  ) {}
 
   getSales(): void {
     this.dataService.getListOfSales().subscribe((result) => {
@@ -49,6 +54,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSales();
+    this.handlePushNotification();
   }
 
   formatNumber(input: number) {
@@ -262,7 +268,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  handleDataReset() {
+  handleDataReset(): void {
     this.isRotateIconClicked = !this.isRotateIconClicked;
     this.isIdDescending = true;
     this.isDateDescending = true;
@@ -275,7 +281,7 @@ export class DashboardComponent implements OnInit {
     this.filteredData = this.sales;
   }
 
-  handleSearchInput() {
+  handleSearchInput(): void {
     this.filteredData = this.sales.filter((sale: any) => {
       switch (this.categoryPicked) {
         case 'productName':
@@ -296,5 +302,9 @@ export class DashboardComponent implements OnInit {
           return false;
       }
     });
+  }
+
+  handlePushNotification(): void {
+    this.pushNotification.requestPermission();
   }
 }
