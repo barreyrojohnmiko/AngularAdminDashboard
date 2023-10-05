@@ -2,9 +2,30 @@
   <div class="header-container container-p">
     <header>Hello, {{ username }}. 👋</header>
 
-    <div class="search-bar-container">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input [(ngModel)]="searchInput" type="text" placeholder="Search..." class="search-input" (ngModelChange)="handleSearchInput()" />
+    <div class="header-container-right-side">
+      <i class="fa-solid fa-bell"></i>
+      <div class="search-bar-container">
+        <select
+          class="category-select"
+          [(ngModel)]="categoryPicked"
+          (ngModelChange)="handleSearchInput()"
+        >
+          <option value="productName">Product</option>
+          <option value="customerName">Customer Name</option>
+          <option value="location">Location</option>
+          <option value="amount">Amount</option>
+        </select>
+        <div class="search-bar-wrapper">
+          <input
+            [(ngModel)]="searchInput"
+            type="text"
+            placeholder="Search..."
+            class="search-input"
+            (ngModelChange)="handleSearchInput()"
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -54,23 +75,60 @@
 
       <div class="time-span-container">
         <div class="reload-section">
-          <i class="fa-solid fa-arrows-rotate" [ngClass]="{'rotate': isRotateIconClicked}" (click)="handleDataReset()"></i>
+          <i
+            class="fa-solid fa-arrows-rotate"
+            [ngClass]="{ rotate: isRotateIconClicked }"
+            (click)="handleDataReset()"
+          ></i>
         </div>
-        <div (click)="toggleTab('today')" class="today-section" [ngClass]="{'tab-active': isTodayTabClicked, 'tab-inactive': !isTodayTabClicked}">Today</div>
-        <div (click)="toggleTab('weekly')" class="weekly-section" [ngClass]="{'tab-active': isWeeklyTabClicked, 'tab-inactive': !isWeeklyTabClicked}">This Week</div>
-        <div (click)="toggleTab('monthly')" class="monthly-section" [ngClass]="{'tab-active': isMonthlyTabClicked, 'tab-inactive': !isMonthlyTabClicked}">This Month</div>
+        <div
+          (click)="toggleTab('today')"
+          class="today-section"
+          [ngClass]="{
+            'tab-active': isTodayTabClicked,
+            'tab-inactive': !isTodayTabClicked
+          }"
+        >
+          Today
+        </div>
+        <div
+          (click)="toggleTab('weekly')"
+          class="weekly-section"
+          [ngClass]="{
+            'tab-active': isWeeklyTabClicked,
+            'tab-inactive': !isWeeklyTabClicked
+          }"
+        >
+          This Week
+        </div>
+        <div
+          (click)="toggleTab('monthly')"
+          class="monthly-section"
+          [ngClass]="{
+            'tab-active': isMonthlyTabClicked,
+            'tab-inactive': !isMonthlyTabClicked
+          }"
+        >
+          This Month
+        </div>
       </div>
     </div>
 
     <div class="table-container">
       <table class="data-table">
         <colgroup>
-          <col style="width: 8%" /> /* ID */
-          <col style="width: 12%" /> /* Date */
-          <col style="width: 23%" /> /* Product */
-          <col style="width: 22%" /> /* Customer Name */
-          <col style="width: 20%" /> /* Location Name */
-          <col style="width: 15%" /> /* Amount Name */
+          <col style="width: 8%" />
+          /* ID */
+          <col style="width: 12%" />
+          /* Date */
+          <col style="width: 23%" />
+          /* Product */
+          <col style="width: 22%" />
+          /* Customer Name */
+          <col style="width: 20%" />
+          /* Location Name */
+          <col style="width: 15%" />
+          /* Amount Name */
         </colgroup>
         <thead>
           <tr>
@@ -138,11 +196,15 @@
         <tbody>
           <tr *ngFor="let sale of filteredData">
             <td class="item-cell truncate-text">{{ sale.id }}</td>
-            <td class="item-cell truncate-text">{{ formatDate(sale.createdAt) }}</td>
+            <td class="item-cell truncate-text">
+              {{ formatDate(sale.createdAt) }}
+            </td>
             <td class="item-cell truncate-text">{{ sale.productName }}</td>
             <td class="item-cell truncate-text">{{ sale.customerName }}</td>
             <td class="item-cell truncate-text">{{ sale.location }}</td>
-            <td class="item-cell truncate-text">₱{{ formatNumber(sale.amount) }}</td>
+            <td class="item-cell truncate-text">
+              ₱{{ formatNumber(sale.amount) }}
+            </td>
           </tr>
         </tbody>
       </table>

@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
   isRotateIconClicked: boolean = false;
 
   searchInput: string = '';
+  categoryPicked: string = 'productName';
 
   constructor(public dataService: DataService) {}
 
@@ -72,14 +73,6 @@ export class DashboardComponent implements OnInit {
     const localDate = moment.tz(date, userTimeZone);
     return localDate.format('MMM. D, YYYY');
   }
-
-  // truncateText(text: string, maxLength: number): string {
-  //   if (text.length <= maxLength) {
-  //     return text;
-  //   } else {
-  //     return text.substr(0, maxLength - 3) + '...';
-  //   }
-  // }
 
   calculateTodaySum(salesData: any[]): number {
     const today = new Date(); // Get today's date
@@ -283,14 +276,24 @@ export class DashboardComponent implements OnInit {
 
   handleSearchInput() {
     this.filteredData = this.sales.filter((sale: any) => {
-      return (
-        sale.id.toString().includes(this.searchInput) ||
-        sale.customerName
-          .toLowerCase()
-          .includes(this.searchInput.toLowerCase()) ||
-        sale.location.toLowerCase().includes(this.searchInput.toLowerCase()) ||
-        sale.amount.toString().includes(this.searchInput)
-      );
+      switch (this.categoryPicked) {
+        case 'productName':
+          return sale.productName
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase());
+        case 'customerName':
+          return sale.customerName
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase());
+        case 'location':
+          return sale.location
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase());
+        case 'amount':
+          return sale.amount.toString().includes(this.searchInput);
+        default:
+          return false;
+      }
     });
   }
 }

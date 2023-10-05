@@ -30,25 +30,67 @@
     color: #000000;
   }
 
-  .search-bar-container {
+  .header-container-right-side {
     display: flex;
     flex-direction: row;
-    width: 300px;
-    gap: 10px;
-    padding: 10px 15px;
-    border-radius: 25px;
-    background-color: rgba(255, 255, 255, 1);
-    border: 2px solid black;
+    align-items: center;
+    gap: 15px;
 
-    .search-input {
-      background-color: transparent;
-      border: 0;
-      color: black;
-      font-weight: 500;
+    .fa-bell {
+      cursor: pointer;
+      font-size: 18px;
     }
 
-    .search-input:focus {
-      outline: none;
+    .fa-bell:hover {
+      color: #ced1f4;
+    }
+
+    .search-bar-container {
+      display: flex;
+      flex-direction: row;
+      border: 1px solid black;
+      background-color: #ffffff;
+      border-radius: 5px;
+
+      .category-select {
+        background-color: transparent;
+        gap: 10px;
+        padding: 10px 10px;
+        border-radius: 5px;
+        width: auto;
+        border: none;
+      }
+
+      .category-select:focus {
+        outline: none;
+      }
+
+      .search-bar-wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 300px;
+        gap: 10px;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 1);
+        border: none;
+        justify-content: space-between;
+
+        .search-input {
+          background-color: transparent;
+          border: 0;
+          color: black;
+          font-weight: 500;
+        }
+
+        .search-input:focus {
+          outline: none;
+        }
+
+        .fa-magnifying-glass {
+          color: #ced1f4;
+        }
+      }
     }
   }
 }
@@ -129,7 +171,7 @@
     .time-span-container {
       width: 30%;
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(13, 1fr);
       text-align: center;
       align-items: center;
       font-size: 14px;
@@ -149,19 +191,19 @@
       }
 
       .today-section {
-        grid-column: span 2;
+        grid-column: span 4;
         padding: 5px 0;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
       }
 
       .weekly-section {
-        grid-column: span 2;
+        grid-column: span 4;
         padding: 5px 0;
       }
 
       .monthly-section {
-        grid-column: span 2;
+        grid-column: span 4;
         padding: 5px 0;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -221,7 +263,7 @@
           font-weight: 300;
           font-size: 14px;
           color: #000000;
-          max-width: 70%; 
+          max-width: 70%;
           white-space: nowrap;
         }
       }
