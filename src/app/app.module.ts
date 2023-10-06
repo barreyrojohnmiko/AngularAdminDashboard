@@ -7,14 +7,18 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
-import { SidebarComponent } from './views/sidebar/sidebar.component';
 import { FullPageLoaderComponent } from './views/full-page-loader/full-page-loader.component';
+import { SidebarComponent } from './views/sidebar/sidebar.component';
 
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 
-import { AuthGuard, AuthGuardLogin } from './auth.guard';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AuthGuard, AuthGuardLogin } from './auth.guard';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     FullPageLoaderComponent,
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireMessagingModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

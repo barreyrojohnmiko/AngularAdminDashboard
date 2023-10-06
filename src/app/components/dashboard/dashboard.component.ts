@@ -4,7 +4,7 @@ import * as moment from 'moment-timezone';
 
 import { DataService } from 'src/app/services/data.service';
 
-import { PushNotificationService } from 'src/app/services/push-notification.service';
+// import { PushNotificationService } from 'src/app/services/push-notification.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public dataService: DataService,
-    public pushNotification: PushNotificationService
+    // public pushNotification: PushNotificationService
   ) {}
 
   getSales(): void {
@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSales();
-    this.handlePushNotification();
+    // this.handlePushNotification();
   }
 
   formatNumber(input: number) {
@@ -304,7 +304,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  handlePushNotification(): void {
-    this.pushNotification.requestPermission();
-  }
+  // handlePushNotification(): void {
+  //   this.pushNotification.requestPermission();
+  // }
 }

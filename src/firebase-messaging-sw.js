@@ -1,21 +1,30 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyD2SudRI1YKECK7Vsb8TiwOg3o6iNB9btU",
-  authDomain: "admindashboard-95c54.firebaseapp.com",
-  projectId: "admindashboard-95c54",
-  storageBucket: "admindashboard-95c54.appspot.com",
-  messagingSenderId: "425465733692",
-  appId: "1:425465733692:web:916bc22bd1549e4d195939",
-  measurementId: "G-T40TBNRLTK"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCwBzuN3EWE5mq0VczwYj3WTKxejWY_-QU",
+//   authDomain: "web-projects-5fc4c.firebaseapp.com",
+//   projectId: "web-projects-5fc4c",
+//   storageBucket: "web-projects-5fc4c.appspot.com",
+//   messagingSenderId: "490656189808",
+//   appId: "1:490656189808:web:400cc3a78d4ebc03e093b5",
+//   measurementId: "G-7B4HF4150D"
+// };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+
+importScripts('https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/10.4.0/firebase-messaging.js');
+
+firebase.initializeApp({
+  apiKey: "AIzaSyCwBzuN3EWE5mq0VczwYj3WTKxejWY_-QU",
+  authDomain: "web-projects-5fc4c.firebaseapp.com",
+  projectId: "web-projects-5fc4c",
+  storageBucket: "web-projects-5fc4c.appspot.com",
+  messagingSenderId: "490656189808",
+  appId: "1:490656189808:web:400cc3a78d4ebc03e093b5",
+  measurementId: "G-7B4HF4150D"
+});
+
+const messaging = firebase.messaging();
