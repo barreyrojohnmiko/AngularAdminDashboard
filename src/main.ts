@@ -11,7 +11,9 @@ if (environment.production) {
   enableProdMode();
 }
 
-const app = initializeApp(environment.firebaseConfig);
+const firebaseConfig = environment.firebaseConfig; // Your Firebase configuration
+
+const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
 // Request notification permission when the app starts
