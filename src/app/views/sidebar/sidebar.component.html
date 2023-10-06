@@ -1,0 +1,16 @@
+<div class="sidebar-main-container" [ngClass]="{ collapsed: isCollapsed }">
+  <div class="sidebar-header">
+    <div class="sidebar-left">
+      <img src="assets/images/TMG.png" alt="Logo" (click)="handleToggleSidebar()" />
+    </div>
+    <header>JMDB</header>
+  </div>
+  <div class="sidebar-panel-container">
+    <div class="sidebar-menu-container" *ngFor="let item of sidebarItems" (click)="item.onClick && item.onClick()">
+      <div class="sidebar-left">
+        <i class="fa-solid icons {{item.icon}}" title="{{item.tooltip}}"></i>
+      </div>
+      <header>{{item.label}}</header>
+    </div>
+  </div>
+</div>

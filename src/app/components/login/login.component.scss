@@ -1,0 +1,145 @@
+.login-main-container {
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+.login-left-container {
+  background-color: #ffe6c9;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 0 15%;
+
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  color: #354f52;
+
+  img {
+    height: 70%;
+  }
+
+  h2 {
+    font-weight: 600;
+  }
+
+  h5 {
+    font-weight: 300;
+  }
+}
+
+.login-right-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  color: #354f52;
+
+  h3 {
+    font-weight: 600;
+  }
+
+  h5 {
+    font-weight: 300;
+  }
+
+  .login-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12.5px;
+      margin: 10px 0;
+
+      .login-field-container {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-size: 16px;
+        }
+
+        input {
+          height: 40px;
+          border-radius: 5px;
+          border: 1px solid lightgray;
+          padding: 0 10px;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        input::placeholder {
+          color: #c7c7c7;
+        }
+
+        .error-text {
+          font-size: 12px;
+          font-weight: 300;
+          color: red;
+        }
+      }
+
+      .remember-me-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .remember-me-content {
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+
+          label {
+            font-size: 12px;
+            color: #9a9da0;
+          }
+        }
+
+        label {
+          font-size: 12px;
+          color: #354f52;
+        }
+      }
+
+      button {
+        border: none;
+        background-color: #354f52;
+        font-family: "Poppins", sans-serif;
+        color: white;
+        font-size: 14px;
+        border-radius: 5px;
+        height: 40px;
+      }
+    }
+  }
+
+  .register-option-container {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+  }
+
+  .register-option-1 {
+    color: #9a9da0;
+  }
+
+  .register-option-2 {
+    color: #0f383d;
+  }
+}

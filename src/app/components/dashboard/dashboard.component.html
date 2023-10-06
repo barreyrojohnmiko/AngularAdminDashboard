@@ -1,0 +1,217 @@
+<div class="dashboard-main-container">
+  <div class="header-container container-p">
+    <header>Hello, {{ username }}. 👋</header>
+
+    <div class="header-container-right-side">
+      <div class="icon-container">
+        <i class="fa-solid fa-bell"></i>
+        <div class="notification-badge" *ngIf="isNotification"></div>
+      </div>
+
+      <div class="search-bar-container">
+        <select
+          class="category-select"
+          [(ngModel)]="categoryPicked"
+          (ngModelChange)="handleSearchInput()"
+        >
+          <option value="productName">Product</option>
+          <option value="customerName">Customer Name</option>
+          <option value="location">Location</option>
+          <option value="amount">Amount</option>
+        </select>
+        <div class="search-bar-wrapper">
+          <input
+            [(ngModel)]="searchInput"
+            type="text"
+            placeholder="Search..."
+            class="search-input"
+            (ngModelChange)="handleSearchInput()"
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-container container-p">
+    <div class="panel-section">
+      <div class="panel-left-side">
+        <div class="panel-label">{{ "Today's Profit" | uppercase }}</div>
+        <div class="panel-count">₱{{ formatNumber(todayProfit) }}</div>
+      </div>
+      <div class="panel-right-side">
+        <div class="panel-icon">
+          <i class="fa-solid fa-coins"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-left-side">
+        <div class="panel-label">{{ "Total Profit" | uppercase }}</div>
+        <div class="panel-count">₱{{ formatNumber(totalProfit) }}</div>
+      </div>
+      <div class="panel-right-side">
+        <div class="panel-icon">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-left-side">
+        <div class="panel-label">
+          {{ "Total Transaction Count" | uppercase }}
+        </div>
+        <div class="panel-count">{{ transactionCount }}</div>
+      </div>
+      <div class="panel-right-side">
+        <div class="panel-icon">
+          <i class="fa-solid fa-receipt"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sales-container">
+    <div class="sales-header-container">
+      <header>Sales</header>
+
+      <div class="time-span-container">
+        <div class="reload-section">
+          <i
+            class="fa-solid fa-arrows-rotate"
+            [ngClass]="{ rotate: isRotateIconClicked }"
+            (click)="handleDataReset()"
+          ></i>
+        </div>
+        <div
+          (click)="toggleTab('today')"
+          class="today-section"
+          [ngClass]="{
+            'tab-active': isTodayTabClicked,
+            'tab-inactive': !isTodayTabClicked
+          }"
+        >
+          Today
+        </div>
+        <div
+          (click)="toggleTab('weekly')"
+          class="weekly-section"
+          [ngClass]="{
+            'tab-active': isWeeklyTabClicked,
+            'tab-inactive': !isWeeklyTabClicked
+          }"
+        >
+          This Week
+        </div>
+        <div
+          (click)="toggleTab('monthly')"
+          class="monthly-section"
+          [ngClass]="{
+            'tab-active': isMonthlyTabClicked,
+            'tab-inactive': !isMonthlyTabClicked
+          }"
+        >
+          This Month
+        </div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="data-table">
+        <colgroup>
+          <col style="width: 8%" />
+          /* ID */
+          <col style="width: 12%" />
+          /* Date */
+          <col style="width: 23%" />
+          /* Product */
+          <col style="width: 22%" />
+          /* Customer Name */
+          <col style="width: 20%" />
+          /* Location Name */
+          <col style="width: 15%" />
+          /* Amount Name */
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="header-cell">
+              ID
+              <i
+                (click)="handleDataSorting('id')"
+                class="fa-solid icons"
+                [class.fa-arrow-up-short-wide]="!isIdDescending"
+                [class.fa-arrow-down-short-wide]="isIdDescending"
+              ></i>
+            </th>
+
+            <th class="header-cell">
+              Date
+              <i
+                (click)="handleDataSorting('date')"
+                class="fa-solid icons"
+                [class.fa-arrow-up-short-wide]="!isDateDescending"
+                [class.fa-arrow-down-short-wide]="isDateDescending"
+              ></i>
+            </th>
+
+            <th class="header-cell">
+              Product
+              <i
+                (click)="handleDataSorting('product')"
+                class="fa-solid icons"
+                [class.fa-arrow-up-short-wide]="!isProductDescending"
+                [class.fa-arrow-down-short-wide]="isProductDescending"
+              ></i>
+            </th>
+
+            <th class="header-cell">
+              Customer Name
+              <i
+                (click)="handleDataSorting('customerName')"
+                class="fa-solid icons"
+                [class.fa-arrow-up-short-wide]="!isCustomerNameDescending"
+                [class.fa-arrow-down-short-wide]="isCustomerNameDescending"
+              ></i>
+            </th>
+
+            <th class="header-cell">
+              Location
+              <i
+                (click)="handleDataSorting('location')"
+                class="fa-solid icons"
+                [class.fa-arrow-up-short-wide]="!isLocationDescending"
+                [class.fa-arrow-down-short-wide]="isLocationDescending"
+              ></i>
+            </th>
+            <th class="header-cell">
+              Amount
+              <i
+                (click)="handleDataSorting('amount')"
+                class="fa-solid icons"
+                [class.fa-arrow-up-short-wide]="!isAmountDescending"
+                [class.fa-arrow-down-short-wide]="isAmountDescending"
+              ></i>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let sale of filteredData">
+            <td class="item-cell truncate-text">{{ sale.id }}</td>
+            <td class="item-cell truncate-text">
+              {{ formatDate(sale.createdAt) }}
+            </td>
+            <td class="item-cell truncate-text">{{ sale.productName }}</td>
+            <td class="item-cell truncate-text">{{ sale.customerName }}</td>
+            <td class="item-cell truncate-text">{{ sale.location }}</td>
+            <td class="item-cell truncate-text">
+              ₱{{ formatNumber(sale.amount) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

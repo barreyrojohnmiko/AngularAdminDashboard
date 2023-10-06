@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~primeicons/primeicons.css";
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
