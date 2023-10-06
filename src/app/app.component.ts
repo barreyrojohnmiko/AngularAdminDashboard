@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
   handlePushNotifications(): void {
     // Initialize and request permission for receiving push notifications
     this.afMessaging.requestPermission.subscribe(
-      () => {
+      (token) => {
         console.log('Notification permission granted.');
         // Register the device token in your server for sending push notifications
         this.afMessaging.getToken.subscribe(
@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     this.afMessaging.messages.subscribe(
       (message) => {
         console.log('Received push notification message:', message);
-        // Handle the received message
+        // Handle the received message, e.g., display it to the user
       },
       (error) => {
         console.error('Error receiving push notification:', error);

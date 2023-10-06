@@ -22,7 +22,7 @@
     "@angular/router": "^15.2.10",
     "@angular/service-worker": "^15.2.10",
     "@fortawesome/fontawesome-free": "^6.4.0",
-    "firebase": "^10.4.0",
+    "firebase": "^9.23.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "primeicons": "^6.0.1",
