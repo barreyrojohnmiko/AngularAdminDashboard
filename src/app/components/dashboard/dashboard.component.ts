@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   isWeeklyTabClicked: boolean = false;
   isMonthlyTabClicked: boolean = false;
 
+  isNotification: boolean = true;
   isRotateIconClicked: boolean = false;
 
   searchInput: string = '';

@@ -36,13 +36,27 @@
     align-items: center;
     gap: 15px;
 
-    .fa-bell {
-      cursor: pointer;
-      font-size: 18px;
-    }
+    .icon-container {
+      position: relative;
+      display: inline-block;
 
-    .fa-bell:hover {
-      color: #ced1f4;
+      .fa-bell {
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: 3px;
+        right: 1px;
+        background-color: #e94d41;
+        color: white;
+        border-radius: 50%;
+        width: 7px;
+        height: 7px;
+        text-align: center;
+        line-height: 16px;
+      }
     }
 
     .search-bar-container {
@@ -269,9 +283,4 @@
       }
     }
   }
-}
-
-.left-section {
-  display: flex;
-  flex-direction: row;
 }
