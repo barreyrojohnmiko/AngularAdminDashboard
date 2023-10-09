@@ -2,7 +2,17 @@
   <app-full-page-loader></app-full-page-loader>
 </div>
 
-<router-outlet (activate)="checkSession($event)" *ngIf="!isLoggedIn"></router-outlet>
+<div *ngIf="message">
+  <h1>{{ message.notification.title }}</h1>
+  <h2>{{ message.notification.body }}</h2>
+</div>
+
+<div *ngIf="!message">No Message Arrived</div>
+
+<router-outlet
+  (activate)="checkSession($event)"
+  *ngIf="!isLoggedIn"
+></router-outlet>
 
 <div class="app-component-main-container" *ngIf="isLoggedIn">
   <div class="sidebar-section">

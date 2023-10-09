@@ -15,6 +15,10 @@ import { CarouselModule } from 'primeng/carousel';
 
 import { AuthGuard, AuthGuardLogin } from './auth.guard';
 
+import { environment } from 'src/environments/environment';
+import { initializeApp } from 'firebase/app';
+initializeApp(environment.firebase);
+
 @NgModule({
   declarations: [
     AppComponent,
