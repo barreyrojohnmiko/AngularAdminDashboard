@@ -8,6 +8,6 @@ export const environment = {
     messagingSenderId: "396998306432",
     appId: "1:396998306432:web:99988aa3b1f460ee131465",
     measurementId: "G-1CT9NTF4S9",
-    vapidKey: 'BGWKRxX4ub_k5LYUs8YseZSFvhwt67RFRyhWcDTFKz5o0iG1NPBdQTKtg0VI9Tzm7NtgKJhJ7QrmdggXFwBlt-k'
+    vapidKey: 'BGWKRxX4ub_k5LYUs8YseZSFvhwt67RFRyhWcDTFKz5o0iG1NPBdQTKtg0VI9Tzm7NtgKJhJ7QrmdggXFwBlt-k' /* Project Settings > Cloud Messaging > Web Push Certificates > Key Pair */
   },
 };
