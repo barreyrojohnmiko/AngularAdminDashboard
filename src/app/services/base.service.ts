@@ -15,6 +15,6 @@ export class BaseService {
   }
 
   get<T>(urlString: string, params: object): Observable<T> {
-    return this.http.get<T>(this.getFullURL(urlString), params);
+    return this.http.get<T>(this.getFullURL(urlString), params); 
   }
 }
