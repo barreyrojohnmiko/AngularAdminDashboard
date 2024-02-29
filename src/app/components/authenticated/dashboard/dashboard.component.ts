@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import * as moment from 'moment-timezone';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { CommonUtilsService } from 'src/app/services/common-utils.service';
 
-import { DataService } from 'src/app/services/data.service';
+import * as moment from 'moment-timezone';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,11 +12,6 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class DashboardComponent implements OnInit {
   username = 'Miko';
-  sales: any = [];
-  filteredData: any = [];
-  totalProfit: number = 0;
-  transactionCount: number = 0;
-  todayProfit: number = 0;
 
   isIdDescending: boolean = true;
   isDateDescending: boolean = true;
@@ -31,52 +27,56 @@ export class DashboardComponent implements OnInit {
   isNotification: boolean = true;
   isRotateIconClicked: boolean = false;
 
+  selectOptions = [
+    { value: 'productName', label: 'Product' },
+    { value: 'customerName', label: 'Customer Name' },
+    { value: 'location', label: 'Location' },
+    { value: 'amount', label: 'Amount' },
+  ];
+  categoryPicked: string = this.selectOptions[0].value;
+
   searchInput: string = '';
-  categoryPicked: string = 'productName';
 
-  constructor(public dataService: DataService) {}
+  salesData: any = [];
+  filteredSalesData: any = [];
 
-  getSales(): void {
-    this.dataService.getListOfSales().subscribe((result) => {
+  todayProfit: number = 0;
+  totalProfit: number = 0;
+  transactionCount: number = 0;
+
+  constructor(
+    public dashboardService: DashboardService,
+    public commonUtilsService: CommonUtilsService
+  ) {}
+
+  GetSales(): void {
+    this.dashboardService.getListOfSales().subscribe((result) => {
       // Check if the result is an array, if not, convert it to an array
       const salesData = Array.isArray(result) ? result : [result];
-      this.sales = salesData;
-      this.filteredData = salesData;
+      this.salesData = salesData;
+      this.filteredSalesData = salesData;
 
       this.handlePanelsData();
     });
   }
 
   ngOnInit(): void {
-    this.getSales();
+    this.GetSales();
   }
 
-  formatNumber(input: number) {
-    let formattedNumber = input.toString();
+  handlePanelsData(): void {
+    const sum = this.calculateTotalSum(this.filteredSalesData);
+    this.totalProfit = sum;
 
-    // Add commas for thousands
-    formattedNumber = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    const idCount = this.filteredSalesData.length;
+    this.transactionCount = idCount;
 
-    // Split the number into integer and decimal parts
-    const parts = formattedNumber.split('.');
-
-    if (parts.length > 1) {
-      parts[1] = parts[1].substring(0, 2); // If there's a decimal part, ensure it has two decimal places
-    } else {
-      parts.push('00'); // If there's no decimal part, add ".00"
-    }
-
-    return parts.join('.');
-  }
-
-  formatDate(date: string): string {
-    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const localDate = moment.tz(date, userTimeZone);
-    return localDate.format('MMM. D, YYYY');
+    const todaySum = this.calculateTodaySum(this.filteredSalesData);
+    this.todayProfit = todaySum;
   }
 
   calculateTodaySum(salesData: any[]): number {
-    const today = new Date(); // Get today's date
+    const today = new Date();
     const todayDateString = today.toISOString().split('T')[0]; // Convert to "yyyy-MM-dd" format
 
     let sum = 0;
@@ -112,17 +112,6 @@ export class DashboardComponent implements OnInit {
     return sum;
   }
 
-  handlePanelsData(): void {
-    const sum = this.calculateTotalSum(this.filteredData);
-    this.totalProfit = sum;
-
-    const idCount = this.filteredData.length;
-    this.transactionCount = idCount;
-
-    const todaySum = this.calculateTodaySum(this.filteredData);
-    this.todayProfit = todaySum;
-  }
-
   handleDataSorting(column: string): void {
     switch (column) {
       case 'id':
@@ -155,7 +144,7 @@ export class DashboardComponent implements OnInit {
   }
 
   sortData(column: string, isDescending: boolean): void {
-    this.filteredData.sort((a: any, b: any) => {
+    this.filteredSalesData.sort((a: any, b: any) => {
       switch (column) {
         case 'id':
           return isDescending ? a.id - b.id : b.id - a.id;
@@ -228,7 +217,7 @@ export class DashboardComponent implements OnInit {
 
     switch (timespan) {
       case 'today':
-        this.filteredData = this.sales.filter((item: any) => {
+        this.filteredSalesData = this.salesData.filter((item: any) => {
           const createdAt = moment.tz(item.createdAt, userTimeZone);
           const userCreatedAt = createdAt.clone().tz(userTimeZone);
 
@@ -239,7 +228,7 @@ export class DashboardComponent implements OnInit {
         const endOfWeek = todayEnd;
         const sixDaysAgo = todayStart.clone().subtract(6, 'days');
 
-        this.filteredData = this.sales.filter((item: any) => {
+        this.filteredSalesData = this.salesData.filter((item: any) => {
           const createdAt = moment.tz(item.createdAt, userTimeZone);
           const userCreatedAt = createdAt.clone().tz(userTimeZone);
 
@@ -252,7 +241,7 @@ export class DashboardComponent implements OnInit {
         const startOfMonth = moment.tz([year, month], userTimeZone);
         const endOfMonth = startOfMonth.clone().endOf('month');
 
-        this.filteredData = this.sales.filter((item: any) => {
+        this.filteredSalesData = this.salesData.filter((item: any) => {
           const createdAt = moment.tz(item.createdAt, userTimeZone);
           return createdAt.isBetween(startOfMonth, endOfMonth, null, '[]');
         });
@@ -272,11 +261,11 @@ export class DashboardComponent implements OnInit {
     this.isTodayTabClicked = false;
     this.isWeeklyTabClicked = false;
     this.isMonthlyTabClicked = false;
-    this.filteredData = this.sales;
+    this.filteredSalesData = this.salesData;
   }
 
   handleSearchInput() {
-    this.filteredData = this.sales.filter((sale: any) => {
+    this.filteredSalesData = this.salesData.filter((sale: any) => {
       switch (this.categoryPicked) {
         case 'productName':
           return sale.productName

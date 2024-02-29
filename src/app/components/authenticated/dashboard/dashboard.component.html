@@ -14,17 +14,17 @@
           [(ngModel)]="categoryPicked"
           (ngModelChange)="handleSearchInput()"
         >
-          <option value="productName">Product</option>
-          <option value="customerName">Customer Name</option>
-          <option value="location">Location</option>
-          <option value="amount">Amount</option>
+          <option *ngFor="let option of selectOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
         </select>
+
         <div class="search-bar-wrapper">
           <input
-            [(ngModel)]="searchInput"
+            class="search-input"
             type="text"
             placeholder="Search..."
-            class="search-input"
+            [(ngModel)]="searchInput"
             (ngModelChange)="handleSearchInput()"
           />
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -37,8 +37,11 @@
     <div class="panel-section">
       <div class="panel-left-side">
         <div class="panel-label">{{ "Today's Profit" | uppercase }}</div>
-        <div class="panel-count">₱{{ formatNumber(todayProfit) }}</div>
+        <div class="panel-count">
+          ₱{{ commonUtilsService.formatAmount(todayProfit) }}
+        </div>
       </div>
+
       <div class="panel-right-side">
         <div class="panel-icon">
           <i class="fa-solid fa-coins"></i>
@@ -49,8 +52,11 @@
     <div class="panel-section">
       <div class="panel-left-side">
         <div class="panel-label">{{ "Total Profit" | uppercase }}</div>
-        <div class="panel-count">₱{{ formatNumber(totalProfit) }}</div>
+        <div class="panel-count">
+          ₱{{ commonUtilsService.formatAmount(totalProfit) }}
+        </div>
       </div>
+
       <div class="panel-right-side">
         <div class="panel-icon">
           <i class="fa-solid fa-wallet"></i>
@@ -65,6 +71,7 @@
         </div>
         <div class="panel-count">{{ transactionCount }}</div>
       </div>
+
       <div class="panel-right-side">
         <div class="panel-icon">
           <i class="fa-solid fa-receipt"></i>
@@ -198,16 +205,16 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let sale of filteredData">
+          <tr *ngFor="let sale of filteredSalesData">
             <td class="item-cell truncate-text">{{ sale.id }}</td>
             <td class="item-cell truncate-text">
-              {{ formatDate(sale.createdAt) }}
+              {{ commonUtilsService.formatDateMDY(sale.createdAt) }}
             </td>
             <td class="item-cell truncate-text">{{ sale.productName }}</td>
             <td class="item-cell truncate-text">{{ sale.customerName }}</td>
             <td class="item-cell truncate-text">{{ sale.location }}</td>
             <td class="item-cell truncate-text">
-              ₱{{ formatNumber(sale.amount) }}
+              ₱{{ commonUtilsService.formatAmount(sale.amount) }}
             </td>
           </tr>
         </tbody>
