@@ -114,7 +114,7 @@
         >
           This Week
         </div>
-        
+
         <div
           (click)="toggleTab('monthly')"
           class="monthly-section"
@@ -130,6 +130,10 @@
 
     <div class="table-container">
       <table class="data-table">
+        <caption>
+          Sales data table
+        </caption>
+
         <colgroup>
           <col style="width: 8%" />
           /* ID */
@@ -196,7 +200,7 @@
                 [class.fa-arrow-down-short-wide]="isLocationAscending"
               ></i>
             </th>
-            
+
             <th class="header-cell">
               Amount
               <i
