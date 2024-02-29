@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Event } from '@angular/router';
 
-import { EventService } from './services/event.service';
-
-import { environment } from 'src/environments/environment';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { environment } from 'src/environments/environment';
+import { EventService } from './services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -27,8 +27,9 @@ export class AppComponent implements OnInit {
     this.listen();
   }
 
-  checkSession(value: any): void {
+  checkSession(event: Event): void {
     const appToken = localStorage.getItem('appToken');
+
     if (appToken && appToken.trim().indexOf('') !== -1) {
       this.isLoggedIn = true;
     }
@@ -57,9 +58,10 @@ export class AppComponent implements OnInit {
         // ...
       });
   }
-  
+
   listen() {
     const messaging = getMessaging();
+
     onMessage(messaging, (payload) => {
       console.log('Message received. ', payload);
       this.message = payload;
