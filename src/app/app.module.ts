@@ -5,8 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/authenticated/dashboard/dashboard.component';
+import { LoginComponent } from './components/public/login/login.component';
 import { SidebarComponent } from './views/sidebar/sidebar.component';
 import { FullPageLoaderComponent } from './views/full-page-loader/full-page-loader.component';
 
