@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DashboardService } from 'src/app/services/dashboard.service';
 import { CommonUtilsService } from 'src/app/services/common-utils.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 import * as moment from 'moment-timezone';
 
@@ -12,20 +12,6 @@ import * as moment from 'moment-timezone';
 })
 export class DashboardComponent implements OnInit {
   username = 'Miko';
-
-  isIdDescending: boolean = true;
-  isDateDescending: boolean = true;
-  isProductDescending: boolean = true;
-  isCustomerNameDescending: boolean = true;
-  isLocationDescending: boolean = true;
-  isAmountDescending: boolean = true;
-
-  isTodayTabClicked: boolean = false;
-  isWeeklyTabClicked: boolean = false;
-  isMonthlyTabClicked: boolean = false;
-
-  isNotification: boolean = true;
-  isRotateIconClicked: boolean = false;
 
   selectOptions = [
     { value: 'productName', label: 'Product' },
@@ -43,6 +29,20 @@ export class DashboardComponent implements OnInit {
   todayProfit: number = 0;
   totalProfit: number = 0;
   transactionCount: number = 0;
+
+  isIdAscending: boolean = true;
+  isDateAscending: boolean = true;
+  isProductAscending: boolean = true;
+  isCustomerNameAscending: boolean = true;
+  isLocationAscending: boolean = true;
+  isAmountAscending: boolean = true;
+
+  isTodayTabClicked: boolean = false;
+  isWeeklyTabClicked: boolean = false;
+  isMonthlyTabClicked: boolean = false;
+
+  isNotification: boolean = true;
+  isRotateIconClicked: boolean = false;
 
   constructor(
     public dashboardService: DashboardService,
@@ -77,14 +77,14 @@ export class DashboardComponent implements OnInit {
 
   calculateTodaySum(salesData: any[]): number {
     const today = new Date();
-    const todayDateString = today.toISOString().split('T')[0]; // Convert to "yyyy-MM-dd" format
+    const todayDateString = today.toISOString().split('T')[0];
 
     let sum = 0;
 
     for (const sale of salesData) {
-      const createdAtDateString = sale.createdAt.split('T')[0]; // Extract the date part
+      const createdAtDateString = sale.createdAt.split('T')[0];
+
       if (createdAtDateString === todayDateString) {
-        // If the date matches today's date, add the amount to the sum
         sum += parseFloat(sale.amount);
       }
     }
@@ -97,14 +97,12 @@ export class DashboardComponent implements OnInit {
 
     for (const sale of salesData) {
       if (typeof sale.amount === 'string') {
-        // Convert the amount string to a number, assuming the string is a valid numeric representation
         const amountAsNumber = parseFloat(sale.amount);
 
         if (!isNaN(amountAsNumber)) {
           sum += amountAsNumber;
         }
       } else if (typeof sale.amount === 'number') {
-        // If the amount is already a number, add it directly
         sum += sale.amount;
       }
     }
@@ -112,72 +110,81 @@ export class DashboardComponent implements OnInit {
     return sum;
   }
 
-  handleDataSorting(column: string): void {
-    switch (column) {
-      case 'id':
-        this.isIdDescending = !this.isIdDescending;
-        this.sortData('id', this.isIdDescending);
-        break;
-      case 'date':
-        this.isDateDescending = !this.isDateDescending;
-        this.sortData('date', this.isDateDescending);
-        break;
-      case 'product':
-        this.isProductDescending = !this.isProductDescending;
-        this.sortData('product', this.isProductDescending);
-        break;
-      case 'customerName':
-        this.isCustomerNameDescending = !this.isCustomerNameDescending;
-        this.sortData('customerName', this.isCustomerNameDescending);
-        break;
-      case 'amount':
-        this.isAmountDescending = !this.isAmountDescending;
-        this.sortData('amount', this.isAmountDescending);
-        break;
-      case 'location':
-        this.isLocationDescending = !this.isLocationDescending;
-        this.sortData('location', this.isLocationDescending);
-        break;
-      default:
-        break;
-    }
-  }
+  sortFilteredSalesData(column: string, isAscending: boolean): void {
+    let dateA, dateB, productA, productB, nameA, nameB, locationA, locationB;
 
-  sortData(column: string, isDescending: boolean): void {
     this.filteredSalesData.sort((a: any, b: any) => {
       switch (column) {
         case 'id':
-          return isDescending ? a.id - b.id : b.id - a.id;
+          return isAscending ? a.id - b.id : b.id - a.id;
         case 'date':
-          const dateA = new Date(a.createdAt);
-          const dateB = new Date(b.createdAt);
-          return isDescending
+          dateA = new Date(a.createdAt);
+          dateB = new Date(b.createdAt);
+
+          return isAscending
             ? dateA.getTime() - dateB.getTime()
             : dateB.getTime() - dateA.getTime();
         case 'product':
-          const productA = a.productName.toLowerCase();
-          const productB = b.productName.toLowerCase();
-          return isDescending
+          productA = a.productName.toLowerCase();
+          productB = b.productName.toLowerCase();
+
+          return isAscending
             ? productA.localeCompare(productB)
             : productB.localeCompare(productA);
         case 'customerName':
-          const nameA = a.customerName.toLowerCase();
-          const nameB = b.customerName.toLowerCase();
-          return isDescending
+          nameA = a.customerName.toLowerCase();
+          nameB = b.customerName.toLowerCase();
+
+          return isAscending
             ? nameA.localeCompare(nameB)
             : nameB.localeCompare(nameA);
         case 'amount':
-          return isDescending ? a.amount - b.amount : b.amount - a.amount;
+          return isAscending ? a.amount - b.amount : b.amount - a.amount;
         case 'location':
-          const locationA = a.location.toLowerCase();
-          const locationB = b.location.toLowerCase();
-          return isDescending
+          locationA = a.location.toLowerCase();
+          locationB = b.location.toLowerCase();
+
+          return isAscending
             ? locationA.localeCompare(locationB)
             : locationB.localeCompare(locationA);
         default:
           return 0;
       }
     });
+  }
+
+  handleColumnDataSorting(column: string): void {
+    switch (column) {
+      case 'id':
+        this.isIdAscending = !this.isIdAscending;
+        this.sortFilteredSalesData('id', this.isIdAscending);
+        break;
+      case 'date':
+        this.isDateAscending = !this.isDateAscending;
+        this.sortFilteredSalesData('date', this.isDateAscending);
+        break;
+      case 'product':
+        this.isProductAscending = !this.isProductAscending;
+        this.sortFilteredSalesData('product', this.isProductAscending);
+        break;
+      case 'customerName':
+        this.isCustomerNameAscending = !this.isCustomerNameAscending;
+        this.sortFilteredSalesData(
+          'customerName',
+          this.isCustomerNameAscending
+        );
+        break;
+      case 'amount':
+        this.isAmountAscending = !this.isAmountAscending;
+        this.sortFilteredSalesData('amount', this.isAmountAscending);
+        break;
+      case 'location':
+        this.isLocationAscending = !this.isLocationAscending;
+        this.sortFilteredSalesData('location', this.isLocationAscending);
+        break;
+      default:
+        break;
+    }
   }
 
   toggleTab(timespan: string): void {
@@ -251,13 +258,13 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  handleDataReset() {
+  handleSalesDataReset() {
     this.isRotateIconClicked = !this.isRotateIconClicked;
-    this.isIdDescending = true;
-    this.isDateDescending = true;
-    this.isCustomerNameDescending = true;
-    this.isLocationDescending = true;
-    this.isAmountDescending = true;
+    this.isIdAscending = true;
+    this.isDateAscending = true;
+    this.isCustomerNameAscending = true;
+    this.isLocationAscending = true;
+    this.isAmountAscending = true;
     this.isTodayTabClicked = false;
     this.isWeeklyTabClicked = false;
     this.isMonthlyTabClicked = false;

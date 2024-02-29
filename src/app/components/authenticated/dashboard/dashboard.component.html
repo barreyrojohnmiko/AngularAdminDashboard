@@ -89,9 +89,10 @@
           <i
             class="fa-solid fa-arrows-rotate"
             [ngClass]="{ rotate: isRotateIconClicked }"
-            (click)="handleDataReset()"
+            (click)="handleSalesDataReset()"
           ></i>
         </div>
+
         <div
           (click)="toggleTab('today')"
           class="today-section"
@@ -102,6 +103,7 @@
         >
           Today
         </div>
+
         <div
           (click)="toggleTab('weekly')"
           class="weekly-section"
@@ -112,6 +114,7 @@
         >
           This Week
         </div>
+        
         <div
           (click)="toggleTab('monthly')"
           class="monthly-section"
@@ -141,64 +144,66 @@
           <col style="width: 15%" />
           /* Amount Name */
         </colgroup>
+
         <thead>
           <tr>
             <th class="header-cell">
               ID
               <i
-                (click)="handleDataSorting('id')"
+                (click)="handleColumnDataSorting('id')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isIdDescending"
-                [class.fa-arrow-down-short-wide]="isIdDescending"
+                [class.fa-arrow-up-short-wide]="!isIdAscending"
+                [class.fa-arrow-down-short-wide]="isIdAscending"
               ></i>
             </th>
 
             <th class="header-cell">
               Date
               <i
-                (click)="handleDataSorting('date')"
+                (click)="handleColumnDataSorting('date')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isDateDescending"
-                [class.fa-arrow-down-short-wide]="isDateDescending"
+                [class.fa-arrow-up-short-wide]="!isDateAscending"
+                [class.fa-arrow-down-short-wide]="isDateAscending"
               ></i>
             </th>
 
             <th class="header-cell">
               Product
               <i
-                (click)="handleDataSorting('product')"
+                (click)="handleColumnDataSorting('product')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isProductDescending"
-                [class.fa-arrow-down-short-wide]="isProductDescending"
+                [class.fa-arrow-up-short-wide]="!isProductAscending"
+                [class.fa-arrow-down-short-wide]="isProductAscending"
               ></i>
             </th>
 
             <th class="header-cell">
               Customer Name
               <i
-                (click)="handleDataSorting('customerName')"
+                (click)="handleColumnDataSorting('customerName')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isCustomerNameDescending"
-                [class.fa-arrow-down-short-wide]="isCustomerNameDescending"
+                [class.fa-arrow-up-short-wide]="!isCustomerNameAscending"
+                [class.fa-arrow-down-short-wide]="isCustomerNameAscending"
               ></i>
             </th>
 
             <th class="header-cell">
               Location
               <i
-                (click)="handleDataSorting('location')"
+                (click)="handleColumnDataSorting('location')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isLocationDescending"
-                [class.fa-arrow-down-short-wide]="isLocationDescending"
+                [class.fa-arrow-up-short-wide]="!isLocationAscending"
+                [class.fa-arrow-down-short-wide]="isLocationAscending"
               ></i>
             </th>
+            
             <th class="header-cell">
               Amount
               <i
-                (click)="handleDataSorting('amount')"
+                (click)="handleColumnDataSorting('amount')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isAmountDescending"
-                [class.fa-arrow-down-short-wide]="isAmountDescending"
+                [class.fa-arrow-up-short-wide]="!isAmountAscending"
+                [class.fa-arrow-down-short-wide]="isAmountAscending"
               ></i>
             </th>
           </tr>
