@@ -20,7 +20,6 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.value.email !== '' && this.loginForm.value.password !== '') {
       localStorage.setItem('appToken', '1');
-      // this.eventService.alertEvents.emit({ status: true });
       this.router.navigate(['/dashboard']);
     }
   }

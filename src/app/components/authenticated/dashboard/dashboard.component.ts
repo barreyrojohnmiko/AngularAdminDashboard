@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CommonUtilsService } from 'src/app/services/common-utils.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { EventService } from 'src/app/services/event.service';
 
 import * as moment from 'moment-timezone';
 
@@ -30,12 +31,12 @@ export class DashboardComponent implements OnInit {
   totalProfit: number = 0;
   transactionCount: number = 0;
 
-  isIdAscending: boolean = true;
-  isDateAscending: boolean = true;
-  isProductAscending: boolean = true;
-  isCustomerNameAscending: boolean = true;
-  isLocationAscending: boolean = true;
-  isAmountAscending: boolean = true;
+  isIdDescending: boolean = false;
+  isDateDescending: boolean = false;
+  isProductDescending: boolean = false;
+  isCustomerNameDescending: boolean = false;
+  isLocationDescending: boolean = false;
+  isAmountDescending: boolean = false;
 
   isTodayTabClicked: boolean = false;
   isWeeklyTabClicked: boolean = false;
@@ -46,17 +47,23 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public dashboardService: DashboardService,
-    public commonUtilsService: CommonUtilsService
+    public commonUtilsService: CommonUtilsService,
+    private eventService: EventService
   ) {}
 
   GetSales(): void {
     this.dashboardService.getListOfSales().subscribe((result) => {
+      this.eventService.alertEvents.emit({ status: true });
       // Check if the result is an array, if not, convert it to an array
       const salesData = Array.isArray(result) ? result : [result];
       this.salesData = salesData;
       this.filteredSalesData = salesData;
 
       this.handlePanelsData();
+
+      setTimeout(() => {
+        this.eventService.alertEvents.emit({ status: false });
+      }, 2000);
     });
   }
 
@@ -110,41 +117,41 @@ export class DashboardComponent implements OnInit {
     return sum;
   }
 
-  sortFilteredSalesData(column: string, isAscending: boolean): void {
+  sortFilteredSalesData(column: string, isDescending: boolean): void {
     let dateA, dateB, productA, productB, nameA, nameB, locationA, locationB;
 
     this.filteredSalesData.sort((a: any, b: any) => {
       switch (column) {
         case 'id':
-          return isAscending ? a.id - b.id : b.id - a.id;
+          return isDescending ? a.id - b.id : b.id - a.id;
         case 'date':
           dateA = new Date(a.createdAt);
           dateB = new Date(b.createdAt);
 
-          return isAscending
+          return isDescending
             ? dateA.getTime() - dateB.getTime()
             : dateB.getTime() - dateA.getTime();
         case 'product':
           productA = a.productName.toLowerCase();
           productB = b.productName.toLowerCase();
 
-          return isAscending
+          return isDescending
             ? productA.localeCompare(productB)
             : productB.localeCompare(productA);
         case 'customerName':
           nameA = a.customerName.toLowerCase();
           nameB = b.customerName.toLowerCase();
 
-          return isAscending
+          return isDescending
             ? nameA.localeCompare(nameB)
             : nameB.localeCompare(nameA);
         case 'amount':
-          return isAscending ? a.amount - b.amount : b.amount - a.amount;
+          return isDescending ? a.amount - b.amount : b.amount - a.amount;
         case 'location':
           locationA = a.location.toLowerCase();
           locationB = b.location.toLowerCase();
 
-          return isAscending
+          return isDescending
             ? locationA.localeCompare(locationB)
             : locationB.localeCompare(locationA);
         default:
@@ -156,31 +163,31 @@ export class DashboardComponent implements OnInit {
   handleColumnDataSorting(column: string): void {
     switch (column) {
       case 'id':
-        this.isIdAscending = !this.isIdAscending;
-        this.sortFilteredSalesData('id', this.isIdAscending);
+        this.isIdDescending = !this.isIdDescending;
+        this.sortFilteredSalesData('id', this.isIdDescending);
         break;
       case 'date':
-        this.isDateAscending = !this.isDateAscending;
-        this.sortFilteredSalesData('date', this.isDateAscending);
+        this.isDateDescending = !this.isDateDescending;
+        this.sortFilteredSalesData('date', this.isDateDescending);
         break;
       case 'product':
-        this.isProductAscending = !this.isProductAscending;
-        this.sortFilteredSalesData('product', this.isProductAscending);
+        this.isProductDescending = !this.isProductDescending;
+        this.sortFilteredSalesData('product', this.isProductDescending);
         break;
       case 'customerName':
-        this.isCustomerNameAscending = !this.isCustomerNameAscending;
+        this.isCustomerNameDescending = !this.isCustomerNameDescending;
         this.sortFilteredSalesData(
           'customerName',
-          this.isCustomerNameAscending
+          this.isCustomerNameDescending
         );
         break;
       case 'amount':
-        this.isAmountAscending = !this.isAmountAscending;
-        this.sortFilteredSalesData('amount', this.isAmountAscending);
+        this.isAmountDescending = !this.isAmountDescending;
+        this.sortFilteredSalesData('amount', this.isAmountDescending);
         break;
       case 'location':
-        this.isLocationAscending = !this.isLocationAscending;
-        this.sortFilteredSalesData('location', this.isLocationAscending);
+        this.isLocationDescending = !this.isLocationDescending;
+        this.sortFilteredSalesData('location', this.isLocationDescending);
         break;
       default:
         break;
@@ -260,15 +267,17 @@ export class DashboardComponent implements OnInit {
 
   handleSalesDataReset() {
     this.isRotateIconClicked = !this.isRotateIconClicked;
-    this.isIdAscending = true;
-    this.isDateAscending = true;
-    this.isCustomerNameAscending = true;
-    this.isLocationAscending = true;
-    this.isAmountAscending = true;
+    this.filteredSalesData = this.salesData;
+
+    this.isIdDescending = false;
+    this.isDateDescending = false;
+    this.isCustomerNameDescending = false;
+    this.isLocationDescending = false;
+    this.isAmountDescending = false;
+
     this.isTodayTabClicked = false;
     this.isWeeklyTabClicked = false;
     this.isMonthlyTabClicked = false;
-    this.filteredSalesData = this.salesData;
   }
 
   handleSearchInput() {

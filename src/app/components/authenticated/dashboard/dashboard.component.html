@@ -156,8 +156,8 @@
               <i
                 (click)="handleColumnDataSorting('id')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isIdAscending"
-                [class.fa-arrow-down-short-wide]="isIdAscending"
+                [class.fa-arrow-up-short-wide]="isIdDescending"
+                [class.fa-arrow-down-short-wide]="!isIdDescending"
               ></i>
             </th>
 
@@ -166,8 +166,8 @@
               <i
                 (click)="handleColumnDataSorting('date')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isDateAscending"
-                [class.fa-arrow-down-short-wide]="isDateAscending"
+                [class.fa-arrow-up-short-wide]="isDateDescending"
+                [class.fa-arrow-down-short-wide]="!isDateDescending"
               ></i>
             </th>
 
@@ -176,8 +176,8 @@
               <i
                 (click)="handleColumnDataSorting('product')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isProductAscending"
-                [class.fa-arrow-down-short-wide]="isProductAscending"
+                [class.fa-arrow-up-short-wide]="isProductDescending"
+                [class.fa-arrow-down-short-wide]="!isProductDescending"
               ></i>
             </th>
 
@@ -186,8 +186,8 @@
               <i
                 (click)="handleColumnDataSorting('customerName')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isCustomerNameAscending"
-                [class.fa-arrow-down-short-wide]="isCustomerNameAscending"
+                [class.fa-arrow-up-short-wide]="isCustomerNameDescending"
+                [class.fa-arrow-down-short-wide]="!isCustomerNameDescending"
               ></i>
             </th>
 
@@ -196,8 +196,8 @@
               <i
                 (click)="handleColumnDataSorting('location')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isLocationAscending"
-                [class.fa-arrow-down-short-wide]="isLocationAscending"
+                [class.fa-arrow-up-short-wide]="isLocationDescending"
+                [class.fa-arrow-down-short-wide]="!isLocationDescending"
               ></i>
             </th>
 
@@ -206,8 +206,8 @@
               <i
                 (click)="handleColumnDataSorting('amount')"
                 class="fa-solid icons"
-                [class.fa-arrow-up-short-wide]="!isAmountAscending"
-                [class.fa-arrow-down-short-wide]="isAmountAscending"
+                [class.fa-arrow-up-short-wide]="isAmountDescending"
+                [class.fa-arrow-down-short-wide]="!isAmountDescending"
               ></i>
             </th>
           </tr>
