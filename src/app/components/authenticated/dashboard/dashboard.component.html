@@ -38,7 +38,7 @@
       <div class="panel-left-side">
         <div class="panel-label">{{ "Today's Profit" | uppercase }}</div>
         <div class="panel-count">
-          ₱{{ commonUtilsService.formatAmount(todayProfit) }}
+          ₱{{ commonUtils.formatAmount(todayProfit) }}
         </div>
       </div>
 
@@ -53,7 +53,7 @@
       <div class="panel-left-side">
         <div class="panel-label">{{ "Total Profit" | uppercase }}</div>
         <div class="panel-count">
-          ₱{{ commonUtilsService.formatAmount(totalProfit) }}
+          ₱{{ commonUtils.formatAmount(totalProfit) }}
         </div>
       </div>
 
@@ -217,13 +217,13 @@
           <tr *ngFor="let sale of filteredSalesData">
             <td class="item-cell truncate-text">{{ sale.id }}</td>
             <td class="item-cell truncate-text">
-              {{ commonUtilsService.formatDateMDY(sale.createdAt) }}
+              {{ commonUtils.formatDateMDY(sale.createdAt) }}
             </td>
             <td class="item-cell truncate-text">{{ sale.productName }}</td>
             <td class="item-cell truncate-text">{{ sale.customerName }}</td>
             <td class="item-cell truncate-text">{{ sale.location }}</td>
             <td class="item-cell truncate-text">
-              ₱{{ commonUtilsService.formatAmount(sale.amount) }}
+              ₱{{ commonUtils.formatAmount(sale.amount) }}
             </td>
           </tr>
         </tbody>

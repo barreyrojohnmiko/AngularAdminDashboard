@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CommonUtilsService } from 'src/app/services/common-utils.service';
+import { CommonUtils } from 'src/app/services/common-utils';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { EventService } from 'src/app/services/event.service';
 
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public dashboardService: DashboardService,
-    public commonUtilsService: CommonUtilsService,
+    public commonUtils: CommonUtils,
     private eventService: EventService
   ) {}
 

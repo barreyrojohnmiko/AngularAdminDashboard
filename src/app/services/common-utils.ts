@@ -5,7 +5,7 @@ import * as moment from 'moment'
 @Injectable({
   providedIn: 'root',
 })
-export class CommonUtilsService {
+export class CommonUtils {
   formatAmount(input: number) {
     let formattedAmount = input.toString();
 
