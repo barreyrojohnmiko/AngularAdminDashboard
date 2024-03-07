@@ -10,17 +10,27 @@ export class SidebarItemsData {
         label: 'Dashboard',
         icon: 'fa-solid fa-chart-simple',
         tooltip: 'Dashboard',
-        onClick: this.handleDashboardClick.bind(this),
+        onClick: this.handleSideMenuClick.bind(this, 'dashboard'),
       },
       {
-        label: 'Lorem Ipsum',
+        label: 'Profile',
         icon: 'fa-solid fa-chart-simple',
+        tooltip: 'Profile',
+        onClick: this.handleSideMenuClick.bind(this, 'profile'),
       },
     ];
   }
 
-  // Methods
-  handleDashboardClick() {
-    this.router.navigate(['/dashboard']);
+  handleSideMenuClick(route: string) {
+    switch (route) {
+      case 'dashboard':
+        this.router.navigate(['/dashboard']);
+        break;
+      case 'profile':
+        this.router.navigate(['/profile']);
+        break;
+      default:
+        break;
+    }
   }
 }

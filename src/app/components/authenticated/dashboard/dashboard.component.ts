@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonUtils } from 'src/app/services/common-utils';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { EventService } from 'src/app/services/event.service';
+import { SubjectService } from 'src/app/services/subject.service';
 
 import * as moment from 'moment-timezone';
 
@@ -12,7 +13,7 @@ import * as moment from 'moment-timezone';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  username = 'Miko';
+  name = 'Miko';
 
   selectOptions = [
     { value: 'productName', label: 'Product' },
@@ -48,7 +49,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     public dashboardService: DashboardService,
     public commonUtils: CommonUtils,
-    private eventService: EventService
+    private eventService: EventService,
+    private subjectService: SubjectService
   ) {}
 
   GetSales(): void {
@@ -68,6 +70,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.subjectService.setName(this.name);
+    this.commonUtils.updateStoredData('name', this.name.toString());
     this.GetSales();
   }
 

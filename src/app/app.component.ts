@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
+import { EventService } from './services/event.service';
 
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-import { environment } from 'src/environments/environment';
-import { EventService } from './services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,16 @@ export class AppComponent implements OnInit {
 
   constructor(private eventService: EventService) {}
 
+  initializeStoredData(): void {
+    const storedData = localStorage.getItem('storedData');
+
+    if (!storedData) {
+      localStorage.setItem('storedData', JSON.stringify([]));
+    }
+  }
+
   ngOnInit() {
+    this.initializeStoredData();
     this.eventService.alertEvents.subscribe((data: any) => {
       this.isShowLoading = data.status;
     });

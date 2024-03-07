@@ -1,11 +1,29 @@
 import { Injectable } from '@angular/core';
 
-import * as moment from 'moment'
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommonUtils {
+  updateStoredData(keyInput: string, valueInput: string): void {
+    let storedData = JSON.parse(localStorage.getItem('storedData') ?? '[]');
+
+    let found = false;
+    storedData.forEach((obj: any) => {
+      if (obj[keyInput] !== undefined) {
+        obj[keyInput] = valueInput;
+        found = true;
+      }
+    });
+
+    if (!found) {
+      storedData.push({ [keyInput]: valueInput });
+    }
+
+    localStorage.setItem('storedData', JSON.stringify(storedData));
+  }
+
   formatAmount(input: number) {
     let formattedAmount = input.toString();
 
